@@ -26,13 +26,11 @@ shinyServer(function(input, output, session) {
                                 input$venue}, {
                                         
                 # for testing
-                date_from <- "&date_from=2018-08-01+00:00:00"
-                date_to <- "&date_to=2018-08-31+23:59:59"
+                #date_from <- "&date_from=2018-08-01+00:00:00"
+                #date_to <- "&date_to=2018-08-31+23:59:59"
                                         
-                # date_from <- ifelse(input$date_from=='', "&date_from=2018-08-01", 
-                #                     paste0('&date_from=', curlEscape(paste(input$date_from, '00:00:00'))))
-                # date_to <- ifelse(input$date_to=='', "&date_to=2018-08-31", 
-                                    # paste0('&date_to=', curlEscape(paste(input$date_to, '23:59:59'))))
+                date_from <- paste0('&date_from=', curlEscape(paste(input$date_from, '00:00:00')))
+                date_to <- paste0('&date_to=', curlEscape(paste(input$date_to, '23:59:59')))
                 artist <- ifelse(input$artist=='', '', 
                                     paste0('&artist=', curlEscape(input$artist)))
                 venue <- ifelse(input$venue=='', '', 
@@ -42,7 +40,7 @@ shinyServer(function(input, output, session) {
 
                 query <- paste0('/events?year=2018',
                                 date_from, date_to, 
-                                # artist, venue, title,
+                                artist, venue, title,
                                 '&key=', api_key)
                 sig <- hmac(secret_key, query, algo='sha1', serialize = F)
                 myurl <- paste0('https://api.edinburghfestivalcity.com', query, '&signature=', sig)
@@ -55,31 +53,4 @@ shinyServer(function(input, output, session) {
                 eventsnow <- events()
                 session$sendCustomMessage("eventdata", eventsnow)
         })
-        
-        # output$eventoutput <- renderUI({
-        #         for (i in 1:length(events())) {
-        #                 ev <- events()[i,]
-        #                 
-        #                 div(
-        #                         div(class='card-items',
-        #                             div(class='card-image', img(src='img/event-image.jpg')),
-        #                             div(class='card-text', h2(class='date', ev$performances[[1]]$start),
-        #                                 h2(class='title', ev$title),
-        #                                 h2(class='artist', ev$artist),
-        #                                 h2(class='venue', ev$venue.name)
-        #                             )
-        #                         ),
-        #                         tags$button(class='card-button', onclick="selectEvent()", '+ select')
-        #                 )
-        #                 
-        #         }
-        #         # for (event in events()) {
-        #         #         event
-        #         #         
-        #         # }
-        #         
-        #         
-        #         
-        # })
-
 })

@@ -199,7 +199,7 @@ button.next-button, button.next-button:hover, button.next-button:focus {
 
 /* sections */
 
-#nav, #section-2, #section-1, #next-2, #next-3, #prev-2, #prev-3 {
+#nav, #section-2, #section-3, #next-2, #next-3, #prev-2, #prev-3 {
   display: none;
 }
 
@@ -269,27 +269,33 @@ video.myVideo {
 }
 
 .input-data-inner {
-  width: 250px;
-  height: 250px;
-  border-radius: 125px;
+  width: 290px;
+  height: 290px;
+  border-radius: 145px;
   background-color: #212121;
   text-align: center;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 7px;
 }
 
 .input-data-inner p {
-  padding-top: 140px;
+  padding-top: 75px;
 }
 
 .input-data-border {
-  border: 5px solid #212121;
+  border: 8px solid #212121;
   text-align: center;
   margin: auto;
   width: 320px;
   height: 320px;
   border-radius: 160px;
-  animation: nudge-1 5s;
+}
+
+.input-data-icon {
+ position: absolute;
+ top: 70px;
+ left: 88px;
+	
 }
 
 .view-inner {
@@ -313,32 +319,41 @@ video.myVideo {
   width: 320px;
   height: 320px;
   border-radius: 160px;
-  animation: nudge-2 5s;
-  animation-delay: 5s;
+}
+
+.view-icon {
+ position: absolute;
+ top: 60px;
+ left: 98px;
 }
 
 .print-inner {
-  width: 190px;
-  height: 190px;
-  border-radius: 95px;
+  width: 290px;
+  height: 290px;
+  border-radius: 145px;
   background-color: #212121;
+  text-align: center;
   margin: auto;
-  margin-top: 62px;
+  margin-top: 7px;
 }
 
 .print-inner p {
-  padding-top: 90px;
+  padding-top: 75px;
 }
 
 .print-border {
-  border: 3px solid #212121;
+  border: 8px solid #212121;
   text-align: center;
   margin: auto;
   width: 320px;
   height: 320px;
   border-radius: 160px;
-  animation: nudge-3 5s;
-  animation-delay: 10s;
+}
+
+.print-icon {
+ position: absolute;
+ top: 70px;
+ left: 98px;
 }
 
 .begin-inner {
@@ -349,31 +364,6 @@ video.myVideo {
   margin-top: 20px;
 }
 
-@keyframes colorful {
-  0%, 100% {background-color: #343434;}
-  50% {background-color: #3138FF;}
-}
-
-@keyframes stretch {
-  0%, 100% {transform: scale(1);}
-  50% {transform: scale(.9);}
-}
-
-@keyframes nudge-1 {
-  0%, 100% {transform: translate(0, 0);}
-  25% {transform: translate(10px, 0);}
-  75% {transform: translate(-10px, 0);}
-}
-@keyframes nudge-2 {
-  0%, 100% {transform: translate(0, 0);}
-  25% {transform: translate(10px, 0);}
-  75% {transform: translate(-10px, 0);}
-}
-@keyframes nudge-3 {
-  0%, 100% {transform: translate(0, 0);}
-  25% {transform: translate(10px, 0);}
-  75% {transform: translate(-10px, 0);}
-}
 
 
 

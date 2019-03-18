@@ -1,195 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Design with Data</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
-  <link href="https://fonts.googleapis.com/css?family=Audiowide|Roboto:300,500,700" rel="stylesheet">
+
+	<title>Design with Data</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Bootstrap/JQuery -->
+	<script src="shared/jquery.js" type="text/javascript"></script>
+
+	<!-- Shiny -->
+	<script src="shared/shiny.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="shared/shiny.css"/>
+
+	<link rel="stylesheet" href="bootstrap.min.css">
+
+	<!-- D3 -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+
+	<!-- vis -->
+	<script src="vis/js/three.js"></script>
+	<script src="vis/js/controls/OrbitControls.js"></script>
+	<script src="https://unpkg.com/topojson@3"></script>
+	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+	<script src="vis/js/WebGL.js"></script>
+	<script type="text/javascript" src='vis/vis.js'></script>
+	
+
+	<!-- Stylesheet + fonts -->
+	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Audiowide|Roboto:300,500,700" rel="stylesheet">
 
 </head>
 <body>
 
-  <div id="section-1" class="container-1 myvideo-mask">
-    <video autoplay muted loop class="myVideo">
-      <source src="img/temp-2.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-    <div class="container">
-      <div class="row">
-        <div class="col col-md-10">
-          <h1>Create your Personal Edinburgh Festival Souvenir</h1>
-          <button id="button-1" class="primary-button">Begin</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="nav" class="nav">
-    <button id="prev-1" class="prev-button">Prev</button>
-    <button id="prev-2" class="prev-button">Prev</button>
-    <button id="prev-3" class="prev-button">Prev</button>
-    <div class="dots">
-      <div id="dot-1" class="dot dot-1"></div>
-      <div id="dot-2" class="dot dot-2"></div>
-      <div id="dot-3" class="dot dot-3"></div>
-    </div>
-    <button id="next-1" class="next-button">Start</button>
-    <button id="next-2" class="next-button">Next</button>
-    <button id="next-3" class="next-button">Next</button>
-  </div>
-
-  <div id="section-2" class="container-2">
-    <div class="container">
-      <div class="row">
-        <div class="col col-md-12">
-          <h1>Instructions</h1>
-        </div>
-      </div>
-      <div class="row instruction-icons">
-        <div class="col col-md-4">
-        <div class="input-data-border">
-            <div class="input-data-inner">
-			<img src="img/enter1.png" width="200" height="186" class="input-data-icon" alt=""/> 
+	<div id="section-1" class="container-1 myvideo-mask">
+		<video autoplay muted loop class="myVideo">
+			<source src="img/temp-2.mp4" type="video/mp4">
+			Your browser does not support HTML5 video.
+		</video>
+		<div class="container">
+			<div class="row">
+				<div class="col col-md-10">
+					<h1>Create your Personal Edinburgh Festival Souvenir</h1>
+					<button id="button-1" class="primary-button">Begin</button>
+				</div>
 			</div>
-          </div>
-        </div>
-        <div class="col col-md-4">
-          <div class="view-border">
-            <div class="view-inner">
-		    <img src="img/view1.png" width="200" height="200" class="view-icon" alt=""/> 
+		</div>
+	</div>
+
+	<div id="nav" class="nav">
+		<button id="prev-1" class="prev-button">Prev</button>
+		<button id="prev-2" class="prev-button">Prev</button>
+		<button id="prev-3" class="prev-button">Prev</button>
+		<button id="prev-4" class="prev-button">Prev</button>
+		<div class="dots">
+			<div id="dot-1" class="dot dot-1"></div>
+			<div id="dot-2" class="dot dot-2"></div>
+			<div id="dot-3" class="dot dot-3"></div>
+		</div>
+		<button id="next-1" class="next-button">Start</button>
+		<button id="next-2" class="next-button">Next</button>
+		<button id="next-3" class="next-button">Next</button>
+	</div>
+
+	<div id="section-2" class="container-2">
+		<div class="container">
+			<div class="row">
+				<div class="col col-md-12">
+					<h1>Instructions</h1>
+				</div>
 			</div>
-          </div>
-        </div>
-        <div class="col col-md-4">
-          <div class="print-border">
-            <div class="print-inner">
-		    <img src="img/print1.png" width="200" height="200" class="print-icon" alt=""/> 
+			<div class="row instruction-icons">
+				<div class="col col-md-4">
+					<div class="input-data-border">
+						<div class="input-data-inner">
+							<img src="img/enter1.png" width="200" height="186" class="input-data-icon" alt=""/> 
+						</div>
+					</div>
+				</div>
+				<div class="col col-md-4">
+					<div class="view-border">
+						<div class="view-inner">
+							<img src="img/view1.png" width="200" height="200" class="view-icon" alt=""/> 
+						</div>
+					</div>
+				</div>
+				<div class="col col-md-4">
+					<div class="print-border">
+						<div class="print-inner">
+							<img src="img/print1.png" width="200" height="200" class="print-icon" alt=""/> 
+						</div>
+					</div>
+				</div>
 			</div>
-          </div>
-        </div>
-      </div>
-      <div class="row instruction-text">
-        <div class="col col-md-4">
-         <h3>Enter the festival events<br>you have attended</h3>
-        </div>
-        <div class="col col-md-4">
-          <h3>View your<br>personal visualisation</h3>
-        </div>
-        <div class="col col-md-4">
-          <h3>Print out your<br>postcard souvenir</h3>
-        </div>
-      </div>
-    </div>
-  </div>
+			<div class="row instruction-text">
+				<div class="col col-md-4">
+					<h3>Enter the festival events<br>you have attended</h3>
+				</div>
+				<div class="col col-md-4">
+					<h3>View your<br>personal visualisation</h3>
+				</div>
+				<div class="col col-md-4">
+					<h3>Print out your<br>postcard souvenir</h3>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div id="section-3">
-    <div class="container-3 top">
-      <div class="container">
-        <div class="row">
-          <div class="col col-md-12">
-            <h1>Select Events</h1>
-          </div>
-        </div>
-        <form>
-          <div class="row">
-            <div class="col col-md-3">
-      	      <h2>Date</h2>
-              <!-- <input type='text' name='startdate'> -- <input type='text' name='enddate'> -->
-              <input class="date" type="date" value="2018-08-01" min="2018-08-01" max="2018-08-31"> -- <input class="date" type="date" value="2018-08-31" min="2018-08-01" max="2018-08-31">
-            </div>
-            <div class="col col-md-3">
-              <h2>Title</h2><input type='text' name='searchtitle'>
-            </div>
-            <div class="col col-md-3">
-              <h2>Artist</h2><input type='text' name='searchartist'>
-            </div>
-            <div class="col col-md-3">
-              <h2>Venue</h2><input type='text' name='searchvenue'>
-              <!-- <button name='submitbtn'>Submit</button> -->
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="container-3 bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col col-md-4">
-            <div class="card">
-              <div class="card-items">
-                <div class="card-image">
-                  <img src="img/event1.png">
-                </div>
-                <div class="card-text">
-                  <h2 class="date">08-26</h2>
-                  <h2 class="title">Home</h2>
-                  <h2 class="artist">Josh Crouch</h2>
-                  <h2 class="venue">King's Theatre</h2>
-                </div>
-              </div>
-              <button class="card-button">+ select</button>
-            </div>
-          </div>
-          <div class="col col-md-4">
-            <div class="card">
-              <div class="card-items">
-                <div class="card-image">
-                  <img src="img/event2.png">
-                </div>
-                <div class="card-text">
-                  <h2 class="date">08-03</h2>
-                  <h2 class="title">Midsummer</h2>
-                  <h2 class="artist">Henry Pettigrew</h2>
-                  <h2 class="venue">The Hub</h2>
-                </div>
-              </div>
-              <button class="card-button">+ select</button>
-            </div>
-          </div>
-          <div class="col col-md-4">
-            <div id="selected" class="card">
-              <div class="card-items">
-                <div class="card-image">
-                  <img src="img/event3.png">
-                </div>
-                <div class="card-text">
-                  <h2 class="date">08-12</h2>
-                  <h2 class="title">Autobiograhy</h2>
-                  <h2 class="artist">Wayne McGregor</h2>
-                  <h2 class="venue">Festival Theatre</h2>
-                </div>
-              </div>
-              <button class="card-button">x remove</button>
-            </div>
-          </div>
+	<div id="section-3">
+		<div class="container-3 top">
+			<div class="container">
+				<div class="row">
+					<div class="col col-md-12">
+						<h1>Select Events</h1>
+					</div>
+				</div>
+				<form>
+					<div class="row">
+						<div class="col col-md-3">
+							<h2>Date</h2>
+							<input class="date" type="date" value="2018-08-01" min="2018-08-01" max="2018-08-31" name="date_from"> -- 
+							<input class="date" type="date" value="2018-08-31" min="2018-08-01" max="2018-08-31" name="date_to">
+						</div>
+						<div class="col col-md-3">
+							<h2>Title</h2><input type='text' name='title'>
+						</div>
+						<div class="col col-md-3">
+							<h2>Artist</h2><input type='text' name='artist'>
+						</div>
+						<div class="col col-md-3">
+							<h2>Venue</h2><input type='text' name='venue'>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="container-3 bottom">
+			<div class="container">
+				<!-- <div class="row"> -->
+					<!-- <div class="col col-md-4"> -->
 
-          <div class="col col-md-12">
-            <div id='nshows' class='shiny-text-output'></div>
-            <div id='shows' class='shiny-table-output'></div>
+						<div id='eventoutput'></div>
 
-            <!-- titlePanel("Festival Search"),
+						<!-- Shiny will output cards in here -->
+						<!-- <div class="card shiny-html-output" id="eventoutput"></div> -->
 
-              # Sidebar with a text input
-              sidebarLayout(
-                sidebarPanel(
-                   textInput('searchterm', label='Search'),
-                   actionButton('btn', 'Search')
-                ),
-                # Show output
-                mainPanel(
-                        textOutput('nshows'),
-                        tableOutput("shows") -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+					<!-- </div> -->
+				<!-- </div> -->
+			</div>
+		</div>
+	</div>
 
-  <script src="script.js"></script>
+	<div id="section-4" class="container-4"></div>
+
+	<script src="script.js"></script>
 
 
 </body>

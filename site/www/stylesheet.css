@@ -199,7 +199,7 @@ button.next-button, button.next-button:hover, button.next-button:focus {
 
 /* sections */
 
-#nav, #section-2, #section-3, #next-2, #next-3, #prev-2, #prev-3 {
+#nav, #section-2, #section-3, #next-2, #next-3, #prev-2, #prev-3, #prev-4 {
   display: none;
 }
 
@@ -421,20 +421,26 @@ input {
 
 .card {
   background-color: #343434;
+  display: inline-block;
+  margin: 10px;
+  width: 360px;
+  height: 240px;
 }
 
 .card-items {
+	display: inline-block;
 
 }
 
 .card-text {
   width: 50%;
-  padding: 20px;
+  padding: 12px;
   float: right;
 }
 
-.card-image img {
-  width: 50%;
+img.card-image {
+  width: 180px;
+  height: 180px;
   float: left;
 }
 
@@ -452,15 +458,17 @@ input {
 }
 
 .card h2.title {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .card h2.date {
   font-weight: 700;
+  font-size: 16px;
 }
 
 .card h2.artist {
   font-weight: 500;
+  font-size: 16px;
 }
 
 #selected {
@@ -477,9 +485,19 @@ input {
   filter: grayscale(100%);
 }
 
-button.card-button, button.card-button:hover, button.card-button:focus {
-  width: 100%;
-  height: 60px;
-  background-color: #3138FF;
-  color: #fff;
+a.card-button {
+	display: block;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	background-color: #3138FF;
+	color: #fff;
+	text-align: center;
+}
+
+
+/*visualisation*/
+canvas {
+	width: 100%;
+	height: 100%;
 }

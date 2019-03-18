@@ -80,6 +80,7 @@ $(document).on('shiny:sessioninitialized', function(event) {
 		var selectedEvents = []
 
 		var div = d3.select('#eventoutput')
+		div.selectAll('*').remove()
 
 		var card = div.selectAll('.card')
 			.data(events)
@@ -102,14 +103,12 @@ $(document).on('shiny:sessioninitialized', function(event) {
 		items.append('div')
 			.classed('card-text', true)
 			.html(function(d) {
-				console.log(d.performances)
 				var dates = d.performances.filter(function(p) {
 					var min = d3.isoParse(document.getElementById('date_from').value)
 					var max = d3.isoParse(document.getElementById('date_to').value)
 					var now = d3.isoParse(p.start)
 					return ((now >= min) && (now <= max))
 				})
-				console.log(dates)
 				return 	'<h2 class="date">' + prettyDate(d3.isoParse(dates[0].start)) + '</h2>' +
 						'<h2 class="title">'+ d.title + '</h2>' +
 						'<h2 class="artist">' + (d.artist ? d.artist : 'Unknown') + '</h2>' +
@@ -120,9 +119,18 @@ $(document).on('shiny:sessioninitialized', function(event) {
 			.classed('card-button', true)
 			.text('+ select')
 			.on('click', function(d) {
-				selectedEvents.push(d)
+				if (d3.select(this.parentNode).classed('selected')) {
+					// delete from selectedEvents ! 
+					var index = selectedEvents.findIndex(e => e.url == d.url)
+					selectedEvents.splice(index, 1)
+					d3.select(this.parentNode).classed('selected', false)
+					d3.select(this).text('+ select')
+				} else {
+					selectedEvents.push(d)
+					d3.select(this.parentNode).classed('selected', true)
+					d3.select(this).text('- remove')
+				}
 				console.log(selectedEvents)
-				d3.select(this).attr('id', 'selected')
 			})
 
 		d3.select('#next-2').on('click', function() {

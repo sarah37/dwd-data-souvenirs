@@ -471,15 +471,15 @@ img.card-image {
   font-size: 16px;
 }
 
-#selected {
+.selected {
   background-color: #ED31FF;
 }
 
-#selected button.card-button {
+.selected a.card-button {
   background-color: transparent;
 }
 
-#selected.card img {
+.selected .card img {
   opacity: 0.2;
   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);

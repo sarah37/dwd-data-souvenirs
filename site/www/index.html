@@ -50,18 +50,19 @@
 	</div>
 
 	<div id="nav" class="nav">
-		<button id="prev-1" class="prev-button">Prev</button>
-		<button id="prev-2" class="prev-button">Prev</button>
-		<button id="prev-3" class="prev-button">Prev</button>
-		<button id="prev-4" class="prev-button">Prev</button>
+		<button id="prev-2" class="prev-button">Prev</button> <!-- instructions -->
+		<button id="prev-3" class="prev-button">Prev</button> <!-- select -->
+		<button id="prev-4" class="prev-button">Prev</button> <!-- animation -->
+		<!-- <button id="prev-5" class="prev-button">Prev</button>  -->
 		<div class="dots">
 			<div id="dot-1" class="dot dot-1"></div>
 			<div id="dot-2" class="dot dot-2"></div>
 			<div id="dot-3" class="dot dot-3"></div>
 		</div>
-		<button id="next-1" class="next-button">Start</button>
-		<button id="next-2" class="next-button">Next</button>
-		<button id="next-3" class="next-button">Next</button>
+		<button id="next-2" class="next-button">Start</button> <!-- instructions -->
+		<button id="next-3" class="next-button">Next</button> <!-- select page -->
+		<button id="next-4" class="next-button">Print</button> <!-- animation page -->
+		<!-- <button id="next-4" class="next-button">Done</button> -->
 	</div>
 
 	<div id="section-2" class="container-2">
@@ -124,7 +125,7 @@
 							<input type="date" class="date" value="2018-08-31" min="2018-08-01" max="2018-08-31" id="date_to">
 						</div>
 						<div class="col col-md-3">
-							<h2>Title</h2><input type='text' name='title'>
+							<h2>Title</h2><form><input type='text' name='title'></form>
 						</div>
 						<div class="col col-md-3">
 							<h2>Artist</h2><input type='text' name='artist'>
@@ -140,6 +141,7 @@
 			<div class="container">
 				<!-- <div class="row"> -->
 					<!-- <div class="col col-md-4"> -->
+						<div id='selectedevents'></div>
 
 						<!-- .card divs are added into this div with js -->
 						<div id='eventoutput'></div>
@@ -151,6 +153,11 @@
 	</div>
 
 	<div id="section-4" class="container-4"></div>
+
+	<div id="section-5" class="container-5">
+		<h1>Printing...</h1>
+	</div>
+
 
 	<script src="script.js"></script>
 

@@ -1,8 +1,5 @@
 function drawVis(events) {
 
-	// empty section 4 in case there was a previous canvas
-	document.getElementById('section-4').innerHTML = "";
-
 	// set min and max date
 	var thisyear = 2018
 	var parseDate = d3.timeParse("%d/%m/%Y");

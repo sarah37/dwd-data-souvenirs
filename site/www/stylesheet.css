@@ -306,7 +306,7 @@ input {
   display: inline-block;
   margin: 10px;
   width: 360px;
-  height: 240px;
+  height: auto;
 }
 
 .card-items {

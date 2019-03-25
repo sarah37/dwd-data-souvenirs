@@ -14,6 +14,30 @@ $(document).ready(function(){
   }); //missing );
 
 
+	$("#next-4").click(function(){
+		// go to print
+		$("#section-4").hide();
+		$("#prev-4").hide();
+		$("#next-4").hide();
+
+		$("#section-5").show();
+		// no buttons just a timer
+
+		document.getElementById("dot-1").style.border = "4px solid #141414";
+		document.getElementById("dot-2").style.border = "4px solid #141414";
+		document.getElementById("dot-3").style.border = "4px solid #343434";
+
+		// set timer to reload after 15s
+		setTimeout(function() {location.reload()}, 10000)
+	});
+
+	// page 5 has no buttons
+
+
+
+
+
+
 });
 
 
@@ -53,6 +77,7 @@ $(document).on('shiny:sessioninitialized', function(event) {
 			.enter()
 			.append('div')
 			.classed('card', true)
+			.attr('id', d => 'card' + d.code)
 
 		var items = card.append('div')
 				.classed('card-items', true)
@@ -91,10 +116,27 @@ $(document).on('shiny:sessioninitialized', function(event) {
 					selectedEvents.splice(index, 1)
 					d3.select(this.parentNode).classed('selected', false)
 					d3.select(this).text('+ select')
+					d3.select('#sel' + d.code).remove()
 				} else {
 					selectedEvents.push(d)
 					d3.select(this.parentNode).classed('selected', true)
-					d3.select(this).text('- remove')
+					d3.select(this).html('- remove')
+					var box = d3.select('#selectedevents').append('div')
+						.attr('id', 'sel' + d.code)
+						.classed('selectedbox', true)
+					box.text(d.title)
+					box.append('div')
+						.classed('selectedx', true)
+						.html('X')
+						.on('click', function() {
+							var index = selectedEvents.findIndex(e => e.url == d.url)
+							selectedEvents.splice(index, 1)
+							d3.select(this.parentNode).remove()
+							d3.select('#card' + d.code).classed('selected', false)
+							d3.select('#card' + d.code).select('.card-button').text('+ select')
+
+
+						})
 				}
 				console.log(selectedEvents)
 			})

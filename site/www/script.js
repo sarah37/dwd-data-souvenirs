@@ -1,69 +1,18 @@
 // page setup
 
 $(document).ready(function(){
-  $("#button-1").click(function(){
-  	// go to instructions page, show nav
-    $("#section-1").hide();
-    $("#section-2").show();
-    $("#nav").show();
-  });
+  $(window).scroll(function() {
+      var scroll = $(window).scrollTop();
 
-  $("#prev-2").click(function(){
-  	// go back to start page
-    $("#section-1").show();
-    $("#section-2").hide();
-    $("#nav").hide();
-  });
+      if (scroll >= 130) {
+          //clearHeader, not clearheader - caps H
+          $("#bar").addClass("fixed-bar");
+      }
+      else {
+        $("#bar").removeClass("fixed-bar");
+      }
+  }); //missing );
 
-  $("#next-2").click(function(){
-  	// go to select page
-    $("#section-2").hide();
-    $("#prev-2").hide();
-    $("#next-2").hide();
-
-    $("#section-3").show();
-    $("#prev-3").show();
-    $("#next-3").show();
-
-  	document.getElementById("dot-1").style.border = "4px solid #343434";
-    document.getElementById("dot-2").style.border = "4px solid #141414";
-    document.getElementById("dot-3").style.border = "4px solid #141414";
-  });
-
-  $("#prev-3").click(function(){
-  	// go back to instruction page
-    $("#section-3").hide();
-    $("#prev-3").hide();
-    $("#next-3").hide();
-
-    $("#section-2").show();
-    $("#prev-2").show();
-    $("#next-2").show();
-
-    document.getElementById("dot-1").style.border = "4px solid #141414";
-    document.getElementById("dot-2").style.border = "4px solid #141414";
-    document.getElementById("dot-3").style.border = "4px solid #141414";
-  });
-
-  // next-3 go to animation -> see below
-
-  $("#prev-4").click(function(){
-  	// go back to select page
-    $("#section-4").hide();
-    $("#prev-4").hide();
-    $("#next-4").hide();
-
-    $("#section-3").show();
-    $("#prev-3").show();
-    $("#next-3").show();
-
-    document.getElementById("dot-1").style.border = "4px solid #343434";
-    document.getElementById("dot-2").style.border = "4px solid #141414";
-    document.getElementById("dot-3").style.border = "4px solid #141414";
-
-	// empty section 4 (delete canvas)
-	document.getElementById('section-4').innerHTML = "";
-  });
 
 	$("#next-4").click(function(){
 		// go to print
@@ -90,6 +39,7 @@ $(document).ready(function(){
 
 
 });
+
 
 // date formatting + parsing
 var prettyDate = d3.timeFormat("%d %B %Y"); // e.g. 01 August 2018
@@ -161,7 +111,7 @@ $(document).on('shiny:sessioninitialized', function(event) {
 			.text('+ select')
 			.on('click', function(d) {
 				if (d3.select(this.parentNode).classed('selected')) {
-					// delete from selectedEvents ! 
+					// delete from selectedEvents !
 					var index = selectedEvents.findIndex(e => e.url == d.url)
 					selectedEvents.splice(index, 1)
 					d3.select(this.parentNode).classed('selected', false)
@@ -192,20 +142,14 @@ $(document).on('shiny:sessioninitialized', function(event) {
 			})
 
 		d3.select('#next-3').on('click', function() {
-			// go to animation page
 			console.log(selectedEvents)
-					
+
 			$("#section-3").hide();
 			$("#prev-3").hide();
 			$("#next-3").hide();
 
 			$("#section-4").show();
 			$("#prev-4").show();
-		    $("#next-4").show();
-
-		    document.getElementById("dot-1").style.border = "4px solid #141414";
-		    document.getElementById("dot-2").style.border = "4px solid #343434";
-		    document.getElementById("dot-3").style.border = "4px solid #141414";
 
 			drawVis(selectedEvents)
 		})

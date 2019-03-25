@@ -1,55 +1,21 @@
 // page setup
 
 $(document).ready(function(){
-  $("#button-1").click(function(){
-    $("#section-1").hide();
-    $("#section-2").show();
-    $("#nav").show();
-  });
+  $(window).scroll(function() {
+      var scroll = $(window).scrollTop();
 
-  $("#prev-1").click(function(){
-    $("#section-1").show();
-    $("#section-2").hide();
-    $("#nav").hide();
-  });
+      if (scroll >= 130) {
+          //clearHeader, not clearheader - caps H
+          $("#bar").addClass("fixed-bar");
+      }
+      else {
+        $("#bar").removeClass("fixed-bar");
+      }
+  }); //missing );
 
-  $("#next-1").click(function(){
-    $("#section-2").hide();
-    $("#prev-1").hide();
-    $("#next-1").hide();
-
-    $("#section-3").show();
-    $("#prev-2").show();
-    $("#next-2").show();
-
-    document.getElementById("dot-1").style.border = "none";
-  });
-
-  $("#prev-2").click(function(){
-    $("#section-3").hide();
-    $("#prev-2").hide();
-    $("#next-2").hide();
-
-    $("#section-2").show();
-    $("#prev-1").show();
-    $("#next-1").show();
-
-    document.getElementById("dot-1").style.border = "4px solid #141414";
-  });
-
-  $("#prev-3").click(function(){
-    $("#section-4").hide();
-    $("#prev-3").hide();
-    // $("#next-2").hide();
-
-    $("#section-3").show();
-    $("#prev-2").show();
-    $("#next-2").show();
-
-    // document.getElementById("dot-1").style.border = "4px solid #141414";
-  });
 
 });
+
 
 // date formatting + parsing
 var prettyDate = d3.timeFormat("%d %B %Y"); // e.g. 01 August 2018
@@ -120,7 +86,7 @@ $(document).on('shiny:sessioninitialized', function(event) {
 			.text('+ select')
 			.on('click', function(d) {
 				if (d3.select(this.parentNode).classed('selected')) {
-					// delete from selectedEvents ! 
+					// delete from selectedEvents !
 					var index = selectedEvents.findIndex(e => e.url == d.url)
 					selectedEvents.splice(index, 1)
 					d3.select(this.parentNode).classed('selected', false)
@@ -133,15 +99,15 @@ $(document).on('shiny:sessioninitialized', function(event) {
 				console.log(selectedEvents)
 			})
 
-		d3.select('#next-2').on('click', function() {
+		d3.select('#next-3').on('click', function() {
 			console.log(selectedEvents)
-					
+
 			$("#section-3").hide();
-			$("#prev-2").hide();
-			$("#next-2").hide();
+			$("#prev-3").hide();
+			$("#next-3").hide();
 
 			$("#section-4").show();
-			$("#prev-3").show();
+			$("#prev-4").show();
 
 			drawVis(selectedEvents)
 		})

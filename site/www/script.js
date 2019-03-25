@@ -130,12 +130,12 @@ $(document).on('shiny:sessioninitialized', function(event) {
 		var items = card.append('div')
 				.classed('card-items', true)
 
-		items.append('img')
-			.classed('card-image', true)
-			.attr('src', function(d) {
+		items.append('div')
+			.classed('card-img', true)
+			.style('background-image', function(d) {
 				var imgs = Object.values(d.images)
         var index = 0
-				return imgs[index].versions['original'].url
+				return 'url("' + imgs[index].versions['original'].url + '")'
 			})
 
 		items.append('div')
@@ -188,6 +188,8 @@ $(document).on('shiny:sessioninitialized', function(event) {
       				}
       				console.log(selectedEvents)
       			})
+
+
 
 		d3.select('#next-3-a').on('click', function() {
 			console.log(selectedEvents)

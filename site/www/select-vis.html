@@ -32,10 +32,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Audiowide|Roboto:300,500,700" rel="stylesheet">
 
 </head>
-<body>
+<body class="select-vis">
 
 	<div id="nav" class="nav">
 		<a href="instructions.html" id="prev-3" class="prev-button">Prev</a>
+		<button id="prev-3-a" class="prev-button">Prev</button>
 		<button id="prev-4" class="prev-button">Prev</button>
 		<div class="dots">
 			<div id="dot-1" class="dot dot-1"></div>
@@ -43,6 +44,7 @@
 			<div id="dot-3" class="dot dot-3"></div>
 		</div>
 		<button id="next-3" class="next-button">Next</button>
+		<button id="next-3-a" class="next-button">Next</button>
 		<button id="next-4" class="next-button">Next</button>
 	</div>
 
@@ -62,18 +64,18 @@
 					<div class="row">
 						<form>
 							<div class="row">
-								<div class="col col-md-3">
+								<div class="col-md-3">
 									<h2>Date</h2>
 									<input type="date" class="date" value="2018-08-01" min="2018-08-01" max="2018-08-31" id="date_from"> --
 									<input type="date" class="date" value="2018-08-31" min="2018-08-01" max="2018-08-31" id="date_to">
 								</div>
-								<div class="col col-md-3">
+								<div class="col-md-3">
 									<h2>Title</h2><input type='text' name='title'>
 								</div>
-								<div class="col col-md-3">
+								<div class="col-md-3">
 									<h2>Artist</h2><input type='text' name='artist'>
 								</div>
-								<div class="col col-md-3">
+								<div class="col-md-3">
 									<h2>Venue</h2><input type='text' name='venue'>
 								</div>
 							</div>
@@ -82,33 +84,57 @@
 				</div>
 			</div>
 		</div>
+		<div class="container-3 selected-block">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<p>Selected</p>
+						<div id='selectedevents'></div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="container-3 bottom">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col col-md-3 sidebar">
-						<h2>Selected Events</h2>
-					</div>
-					<div class="col col-md-9">
-						<div class="row">
-							<div class="col col-md-3">
-							</div>
-							<div class="col col-md-3">
-							</div>
-							<div class="col col-md-3">
-							</div>
-
-							<div id='eventoutput'></div>
-						</div>
-					</div>
+					<div id='eventoutput'></div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="section-4" class="container-4"></div>
+	<div id="section-3-a" class="container-3-a">
+		<div class="container">
+			<div class="row">
+				<div class="col col-md-12">
+					<h1>Star your favourite events</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="section-4" class="container-4">
+		<div class="container">
+			<div class="row">
+				<div class="col col-md-12">
+					<h1>Select a view for print</h1>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<div id="section-5" class="container-5">
+		<div class="container">
+			<div class="row">
+				<div class="col col-md-12">
+					<h1>Print</h1>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="script.js"></script>
-
 
 </body>
 </html>

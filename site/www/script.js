@@ -14,6 +14,37 @@ $(document).ready(function(){
   }); //missing );
 
 
+
+  $("#next-3").click(function(){
+		// go to print
+		$("#section-3").hide();
+		$("#prev-3").hide();
+		$("#next-3").hide();
+
+		$("#section-3-a").show();
+    $("#prev-3-a").show();
+    $("#next-3-a").show();
+
+    document.getElementById("dot-1").style.border = "6px solid #fff";
+    document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
+    document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
+	});
+
+  $("#prev-3-a").click(function(){
+    // go to print
+    $("#section-3-a").hide();
+    $("#prev-3-a").hide();
+    $("#next-3-a").hide();
+
+    $("#section-3").show();
+    $("#prev-3").show();
+    $("#next-3").show();
+
+    document.getElementById("dot-1").style.border = "6px solid #fff";
+    document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
+    document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
+  });
+
 	$("#next-4").click(function(){
 		// go to print
 		$("#section-4").hide();
@@ -21,15 +52,30 @@ $(document).ready(function(){
 		$("#next-4").hide();
 
 		$("#section-5").show();
-		// no buttons just a timer
 
-		document.getElementById("dot-1").style.border = "4px solid #141414";
-		document.getElementById("dot-2").style.border = "4px solid #141414";
-		document.getElementById("dot-3").style.border = "4px solid #343434";
 
-		// set timer to reload after 15s
-		setTimeout(function() {location.reload()}, 10000)
+    document.getElementById("dot-1").style.border = "6px solid #2B2B2B";
+    document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
+    document.getElementById("dot-3").style.border = "6px solid #fff";
+    // set timer to reload after 15s
+    setTimeout(function() {window.location.assign('index.html')}, 10000)
 	});
+
+  $("#prev-4").click(function(){
+    // go to print
+    $("#section-4").hide();
+    $("#prev-4").hide();
+    $("#next-4").hide();
+
+    $("#section-3-a").show();
+    $("#prev-3-a").show();
+    $("#next-3-a").show();
+
+    document.getElementById("dot-1").style.border = "6px solid #fff";
+    document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
+    document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
+  });
+
 
 	// page 5 has no buttons
 
@@ -72,11 +118,13 @@ $(document).on('shiny:sessioninitialized', function(event) {
 		var div = d3.select('#eventoutput')
 		div.selectAll('*').remove()
 
-		var card = div.selectAll('.card')
+		var card = div.selectAll('.col-md-3')
 			.data(events)
 			.enter()
 			.append('div')
-			.classed('card', true)
+			.classed('col-md-3', true)
+      .append('div')
+      .classed('card', true)
 			.attr('id', d => 'card' + d.code)
 
 		var items = card.append('div')
@@ -86,9 +134,8 @@ $(document).on('shiny:sessioninitialized', function(event) {
 			.classed('card-image', true)
 			.attr('src', function(d) {
 				var imgs = Object.values(d.images)
-				var index = imgs.findIndex(d => d.orientation == 'square')
-				if (index == -1) {index = 0}
-				return imgs[index].versions['square-150'].url
+        var index = 0
+				return imgs[index].versions['original'].url
 			})
 
 		items.append('div')
@@ -106,53 +153,60 @@ $(document).on('shiny:sessioninitialized', function(event) {
 						'<h2 class="venue">'+ d.venue.name + '</h2>'
 			})
 
-		card.append('a')
-			.classed('card-button', true)
-			.text('+ select')
-			.on('click', function(d) {
-				if (d3.select(this.parentNode).classed('selected')) {
-					// delete from selectedEvents !
-					var index = selectedEvents.findIndex(e => e.url == d.url)
-					selectedEvents.splice(index, 1)
-					d3.select(this.parentNode).classed('selected', false)
-					d3.select(this).text('+ select')
-					d3.select('#sel' + d.code).remove()
-				} else {
-					selectedEvents.push(d)
-					d3.select(this.parentNode).classed('selected', true)
-					d3.select(this).html('- remove')
-					var box = d3.select('#selectedevents').append('div')
-						.attr('id', 'sel' + d.code)
-						.classed('selectedbox', true)
-					box.text(d.title)
-					box.append('div')
-						.classed('selectedx', true)
-						.html('X')
-						.on('click', function() {
-							var index = selectedEvents.findIndex(e => e.url == d.url)
-							selectedEvents.splice(index, 1)
-							d3.select(this.parentNode).remove()
-							d3.select('#card' + d.code).classed('selected', false)
-							d3.select('#card' + d.code).select('.card-button').text('+ select')
+      card.append('a')
+      			.classed('card-button', true)
+      			.text('+ select')
+      			.on('click', function(d) {
+      				if (d3.select(this.parentNode).classed('selected')) {
+      					// delete from selectedEvents !
+      					var index = selectedEvents.findIndex(e => e.url == d.url)
+      					selectedEvents.splice(index, 1)
+      					d3.select(this.parentNode).classed('selected', false)
+      					d3.select(this).text('+ select')
+      					d3.select('#sel' + d.code).remove()
+      				} else {
+      					selectedEvents.push(d)
+      					d3.select(this.parentNode).classed('selected', true)
+      					d3.select(this).text('- remove')
+      					d3.select(this).html('- remove')
+      					var box = d3.select('#selectedevents').append('div')
+      						.attr('id', 'sel' + d.code)
+      						.classed('selectedbox', true)
+      					box.text(d.title)
+      					box.append('div')
+      						.classed('selectedx', true)
+      						.html('X')
+      						.on('click', function() {
+      							var index = selectedEvents.findIndex(e => e.url == d.url)
+      							selectedEvents.splice(index, 1)
+      							d3.select(this.parentNode).remove()
+      							d3.select('#card' + d.code).classed('selected', false)
+      							d3.select('#card' + d.code).select('.card-button').text('+ select')
 
 
-						})
-				}
-				console.log(selectedEvents)
-			})
+      						})
+      				}
+      				console.log(selectedEvents)
+      			})
 
-		d3.select('#next-3').on('click', function() {
+		d3.select('#next-3-a').on('click', function() {
 			console.log(selectedEvents)
 
-			$("#section-3").hide();
-			$("#prev-3").hide();
-			$("#next-3").hide();
+			$("#section-3-a").hide();
+			$("#prev-3-a").hide();
+			$("#next-3-a").hide();
 
 			$("#section-4").show();
 			$("#prev-4").show();
+      $("#next-4").show();
+
+      document.getElementById("dot-1").style.border = "6px solid #2B2B2B";
+      document.getElementById("dot-2").style.border = "6px solid #fff";
+      document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
 
 			drawVis(selectedEvents)
 		})
+
 
 	});
 });

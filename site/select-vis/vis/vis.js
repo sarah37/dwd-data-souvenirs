@@ -80,6 +80,7 @@ function drawVis(events) {
     // add stars and satellites
 	var objects = [];
 	var sats=[];
+  var Labels=[];
     events.forEach(function(ev) {
     	ev.pos = projection([ev.longitude, ev.latitude])
 
@@ -95,7 +96,6 @@ function drawVis(events) {
 			objects.push(sphere);
 			scene.add(sphere);
 
-
 			var labelDiv = document.createElement('div');
 			labelDiv.className = 'label';
 			labelDiv.textContent = ev.title;
@@ -103,7 +103,10 @@ function drawVis(events) {
 
 			var Label = new THREE.CSS2DObject(labelDiv);
 			Label.position.set(0, 50, 0);
-			sphere.add(Label);
+      //sphere.add(Label);
+			Labels.push(Label);
+
+
 
 			labelRenderer = new THREE.CSS2DRenderer();
 			labelRenderer.setSize( window.innerWidth, window.innerHeight );
@@ -181,8 +184,43 @@ function drawVis(events) {
 	var box = new THREE.BoxHelper(wpoints1, 0x565656  );
 	scene.add( box );
 
+	//grid Helper
+  var gridHelper = new THREE.GridHelper(1000, 50, 0xFF4444, 0x404040 );
+  scene.add( gridHelper );
+	//GUI for gridhelper
+  var gui=new dat.GUI();
+  var controls = new function(){
+    this.gridHelper =false;
+    this.label=true;
+  }
+  var allGui=gui.addFolder('Control');
+  allGui.add(controls,'gridHelper').onChange(function(e){
+  console.log(e);
+  if(e){
+    scene.remove(gridHelper);
+  }else{
+    scene.add(gridHelper);
+  }
+  });
+  //GUI for label
 
-	// var step = 0
+  for(var i=0;i<objects.length;i++){
+    objects[i].add(Labels[i]);
+  }
+  allGui.add(controls,'label').onChange(function(e){
+    if(e){
+      for(var i=0;i<objects.length;i++){
+        objects[i].add(Labels[i]);
+      }
+    }else{
+      for(var i=0;i<objects.length;i++){
+        objects[i].remove(Labels[i]);
+      }
+    }
+  });
+
+
+	// // var step = 0
 
 	// animate/render loop
 	var animate = function () {
@@ -208,9 +246,9 @@ function drawVis(events) {
 
 
 		renderer.render( scene, camera );
-		labelRenderer.render( scene, camera );
 
-	};
+		labelRenderer.render( scene, camera );
+  };
 
 	animate();
 

@@ -11,7 +11,7 @@ function drawVis(events) {
 	// create time scale (vertical axis)
 	var timeScale = d3.scaleTime()
 		.domain([minDate,maxDate])  // data space
-		.range([0, 1000]);  // display space
+		.range([0, 900]);  // display space
 
 	// projection
 	const s = 130000
@@ -30,11 +30,14 @@ function drawVis(events) {
 	camera.position.z = 1100
 
 	//SET UP LIGHT
+	var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+	scene.add( light );
+
 	var light1 = new THREE.SpotLight( 0xffffff, 1.5 );
 	light1.position.set( 1000, 500, 2000 );
 	scene.add( light1 );
 
-	var light2 = new THREE.SpotLight( 0xffffff, 1.5 );
+	var light2 = new THREE.SpotLight( 0xffffff, 1 );
 	light2.position.set( -1000, 500, -2000 );
 	scene.add( light2 );
 
@@ -94,8 +97,8 @@ function drawVis(events) {
 		var sphere = new THREE.Mesh( geometry, material );
 		sphere.position.x = ev.pos[0]-512 //front-back
 		sphere.position.z = ev.pos[1]-512 //left-right
-		if(timeScale(d3.isoParse(ev.performances[0].start))>-600 && timeScale(d3.isoParse(ev.performances[0].start))<1000) {
-			sphere.position.y = timeScale(d3.isoParse(ev.performances[0].start)) - 200//vertical
+		if(timeScale(d3.isoParse(ev.performances[0].start))>-600 && timeScale(d3.isoParse(ev.performances[0].start))<900) {
+			sphere.position.y = timeScale(d3.isoParse(ev.performances[0].start)) - 260//vertical
 			objects.push(sphere);
 			scene.add(sphere);
 
@@ -105,10 +108,10 @@ function drawVis(events) {
 			titlelabel.textContent = ev.title;
 			titlelabel.style.marginTop = '-1em';
 
-			var datelabel = document.createElement('div');
-			datelabel.className = 'label';
-			datelabel.textContent = ev.performances[0].start;
-			datelabel.style.marginTop = '-1em';
+			// var datelabel = document.createElement('div');
+			// datelabel.className = 'label';
+			// datelabel.textContent = ev.performances[0].start;
+			// datelabel.style.marginTop = '-1em';
 
 			var Label1 = new THREE.CSS2DObject(titlelabel);
 			Label1.position.set(0, 50, 0);
@@ -199,7 +202,8 @@ function drawVis(events) {
 
 	//GUI
     var gui=new dat.GUI();
-    var controls = new function(){
+	gui.domElement.style = "color:#fff001";//yellow
+	var controls = new function(){
     this.LABEL=true;
   }
 

@@ -110,6 +110,9 @@
 				<div class="col col-md-12">
 					<h1>Star your favourite events</h1>
 				</div>
+				<div class="col col-md-12" id='starlist'>
+					
+				</div>
 			</div>
 		</div>
 	</div>

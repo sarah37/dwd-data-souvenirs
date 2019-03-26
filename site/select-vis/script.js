@@ -30,7 +30,9 @@ $(document).ready(function(){
     document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
     document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
 
-    console.log('next 3')
+    starList(selectedEvents)
+
+    // console.log('next 3')
 	});
 
   $("#prev-3-a").click(function(){

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>Design with Data</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Bootstrap/JQuery -->
+	<script src="../lib/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="../lib/bootstrap.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="../lib/bootstrap.min.css">
+
+	<!-- Stylesheet + fonts -->
+	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Audiowide|Roboto:300,500,700" rel="stylesheet">
+
+	<!-- D3 -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://unpkg.com/topojson@3"></script>
+
+	<!-- vis -->
+	<script src="vis/js/three.js"></script>
+	<script src="vis/js/controls/OrbitControls.js"></script>
+	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
+	<script src="vis/js/WebGL.js"></script>
+	<script type="text/javascript" src='vis/vis.js'></script>
+	
+</head>
+<body>
+	<style type="text/css">
+		#section-4 {
+			display: block;
+		}
+
+	</style>
+
+	<div id="section-4" class="container-4"></div>
+
+	<script type="text/javascript">
+		
+		d3.json('test-data.json').then(function(test) {
+			drawVis(test)
+		})
+
+	</script>
+
+</body>
+</html>

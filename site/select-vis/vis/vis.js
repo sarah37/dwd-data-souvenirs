@@ -205,7 +205,6 @@ function drawVis(events) {
 	gui.domElement.style = "color:#fff001";//yellow
 	var controls = new function(){
     this.LABEL=true;
-    this.OVERVIEW=true;
   }
 
     for(var i = 0;i<objects.length;i++){
@@ -222,28 +221,8 @@ function drawVis(events) {
       }
     }
   });
-//camera control
-  gui.add(controls,'OVERVIEW').onChange(function(e){
-    if(e){
-      camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 10000);
-      camera.position.x = 1500
-      camera.position.y = 0
-      camera.position.z = 1100
-      var orbitControls = new THREE.OrbitControls(camera)
-      orbitControls.autoRotate = true
-    }else{
-      camera = new THREE.OrthographicCamera( window.innerWidth/-1.3, window.innerWidth/1.3, window.innerHeight/1.3,  window.innerHeight/-1.3, 1, 10000 );
-      //camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 10000);
 
-      camera.position.x = 0
-      camera.position.y = -200
-      camera.position.z = 0
-      camera.rotation.x=-0.5 * Math.PI;
-      // var orbitControls = new THREE.OrbitControls(camera)
-      // orbitControls.autoRotate = true
 
-    }
-  });
 	// // var step = 0
 
 	// animate/render loop

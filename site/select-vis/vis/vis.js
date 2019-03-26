@@ -22,6 +22,8 @@ function drawVis(events) {
 
 	// SET UP SCENE
 	var scene = new THREE.Scene();
+	scene.background = new THREE.Color(0x232323);
+
 
 	// SET UP CAMERA
 	var camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 10000);
@@ -30,9 +32,21 @@ function drawVis(events) {
 	camera.position.z = 1100
 
 	//SET UP LIGHT
-	var light = new THREE.DirectionalLight( 0xffffff,2 );
-	light.position.set( 100, 100, 100 ).normalize();
-	scene.add( light );
+	var light1 = new THREE.SpotLight( 0xffffff, 1.5 );
+	light1.position.set( 1000, 500, 2000 );
+	scene.add( light1 );
+
+	var light2 = new THREE.SpotLight( 0xffffff, 1.5 );
+	light2.position.set( -1000, 500, -2000 );
+	scene.add( light2 );
+
+	// var light1 = new THREE.DirectionalLight( 0xffffff,1 );
+	// light1.position.set( 1000, 1500, -1000 ).normalize();
+	// scene.add( light1 );
+	//
+	// var light2 = new THREE.DirectionalLight( 0xffffff,1.7 );
+	// light2.position.set( 1500, -1700, 2000 ).normalize();
+	// scene.add( light2 );
 
 
 	// initialize camera plugins to drag the camera
@@ -62,7 +76,7 @@ function drawVis(events) {
 	// plane.rotation.y = -0.1 * Math.PI
 	scene.add( plane );
 
-	// draw red cube at origin for orientation
+	// draw a cube at origin for orientation
 	var geometry = new THREE.BoxGeometry(10,10,10)
 	var material = new THREE.MeshNormalMaterial();
 	var cube = new THREE.Mesh(geometry, material)
@@ -85,7 +99,7 @@ function drawVis(events) {
 
 		var geometry = new THREE.OctahedronGeometry(20, 0);
 		var material = new THREE.MeshLambertMaterial({
-			color: Math.random() * 0x31f3ff,wireframe:false
+			color: Math.random() * 0xffffff,wireframe:false
 		})
 		var sphere = new THREE.Mesh( geometry, material );
 		sphere.position.x = ev.pos[0]-512 //front-back
@@ -95,15 +109,24 @@ function drawVis(events) {
 			objects.push(sphere);
 			scene.add(sphere);
 
+            //labels
+			var titlelabel = document.createElement('div');
+			titlelabel.className = 'label';
+			titlelabel.textContent = ev.title;
+			titlelabel.style.marginTop = '-1em';
 
-			var labelDiv = document.createElement('div');
-			labelDiv.className = 'label';
-			labelDiv.textContent = ev.title;
-			labelDiv.style.marginTop = '-1em';
+			var datelabel = document.createElement('div');
+			datelabel.className = 'label';
+			datelabel.textContent = ev.performances[0].start;
+			datelabel.style.marginTop = '-1em';
 
-			var Label = new THREE.CSS2DObject(labelDiv);
-			Label.position.set(0, 50, 0);
-			sphere.add(Label);
+			var Label1 = new THREE.CSS2DObject(titlelabel);
+			Label1.position.set(0, 50, 0);
+			sphere.add(Label1);
+
+			var Label2 = new THREE.CSS2DObject(datelabel);
+			Label2.position.set(0, 80, 0);
+			sphere.add(Label2);
 
 			labelRenderer = new THREE.CSS2DRenderer();
 			labelRenderer.setSize( window.innerWidth, window.innerHeight );
@@ -114,8 +137,9 @@ function drawVis(events) {
 			labelRenderer.domElement.style.fontWeight = '100';
 			document.body.appendChild( labelRenderer.domElement );
 
+			//satellites
 			var satgeometry = new THREE.TetrahedronGeometry(5, 0);
-			var satmaterial = new THREE.MeshBasicMaterial({
+			var satmaterial = new THREE.MeshLambertMaterial({
 				color: 0xfff001,wireframe:false
 			})
 			var  sat = new THREE.Mesh( satgeometry, satmaterial );
@@ -133,7 +157,8 @@ function drawVis(events) {
 	    var curve = new THREE.CatmullRomCurve3(curvespositions);
 	    var points = curve.getPoints( events.length * 10 );
 	    var geometry = new THREE.BufferGeometry().setFromPoints( points );
-	    var material = new THREE.LineDashedMaterial( { color: 0xffffff,dashSize: 20, gapSize: 5 } );
+	    var material = new THREE.LineDashedMaterial( { color: 0xffffff,dashSize: 15, gapSize: 5 } );
+	    material.linewidth = 5;
 		// 线的材质可以由2点的颜色决定
 		// var material = new THREE.LineBasicMaterial( { vertexColors: true } );
 		// var color1 = new THREE.Color( 0x444444 ), color2 = new THREE.Color( 0xFF0000 );
@@ -187,7 +212,6 @@ function drawVis(events) {
 	// animate/render loop
 	var animate = function () {
 		requestAnimationFrame( animate );
-		renderer.setClearColor(0x232323,1.0);
 		for(var i = 0; i < sats.length;i++) {
 
 			var elapsed = clock.getElapsedTime();
@@ -195,6 +219,7 @@ function drawVis(events) {
 
 			sats[i].rotation.x += 0.001;
 			sats[i].rotation.y += 0.001;
+			sats[i].rotation.z += 0.001;
 		}
 		//background color
 		// cube.rotation.x += 0.01;

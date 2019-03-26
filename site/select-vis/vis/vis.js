@@ -30,10 +30,13 @@ function drawVis(events) {
 	camera.position.z = 1100
 
 	//SET UP LIGHT
-	var light = new THREE.DirectionalLight( 0xffffff,2 );
-	light.position.set( 100, 100, 100 ).normalize();
-	scene.add( light );
+	var light1 = new THREE.SpotLight( 0xffffff, 1.5 );
+	light1.position.set( 1000, 500, 2000 );
+	scene.add( light1 );
 
+	var light2 = new THREE.SpotLight( 0xffffff, 1.5 );
+	light2.position.set( -1000, 500, -2000 );
+	scene.add( light2 );
 
 	// initialize camera plugins to drag the camera
 	var orbitControls = new THREE.OrbitControls(camera)
@@ -80,7 +83,7 @@ function drawVis(events) {
     // add stars and satellites
 	var objects = [];
 	var sats=[];
-  var Labels=[];
+    var labels=[];
     events.forEach(function(ev) {
     	ev.pos = projection([ev.longitude, ev.latitude])
 
@@ -96,17 +99,26 @@ function drawVis(events) {
 			objects.push(sphere);
 			scene.add(sphere);
 
-			var labelDiv = document.createElement('div');
-			labelDiv.className = 'label';
-			labelDiv.textContent = ev.title;
-			labelDiv.style.marginTop = '-1em';
+			//labels
+			var titlelabel = document.createElement('div');
+			titlelabel.className = 'label';
+			titlelabel.textContent = ev.title;
+			titlelabel.style.marginTop = '-1em';
 
-			var Label = new THREE.CSS2DObject(labelDiv);
-			Label.position.set(0, 50, 0);
-      //sphere.add(Label);
-			Labels.push(Label);
+			var datelabel = document.createElement('div');
+			datelabel.className = 'label';
+			datelabel.textContent = ev.performances[0].start;
+			datelabel.style.marginTop = '-1em';
 
+			var Label1 = new THREE.CSS2DObject(titlelabel);
+			Label1.position.set(0, 50, 0);
+			// sphere.add(Label1);
+			labels.push(Label1);
 
+			// var Label2 = new THREE.CSS2DObject(datelabel);
+			// Label2.position.set(0, 80, 0);
+			// // sphere.add(Label2);
+			// labels.push(Label2);
 
 			labelRenderer = new THREE.CSS2DRenderer();
 			labelRenderer.setSize( window.innerWidth, window.innerHeight );
@@ -184,37 +196,24 @@ function drawVis(events) {
 	var box = new THREE.BoxHelper(wpoints1, 0x565656  );
 	scene.add( box );
 
-	//grid Helper
-  var gridHelper = new THREE.GridHelper(1000, 50, 0xFF4444, 0x404040 );
-  scene.add( gridHelper );
-	//GUI for gridhelper
-  var gui=new dat.GUI();
-  var controls = new function(){
-    this.gridHelper =false;
-    this.label=true;
-  }
-  var allGui=gui.addFolder('Control');
-  allGui.add(controls,'gridHelper').onChange(function(e){
-  console.log(e);
-  if(e){
-    scene.remove(gridHelper);
-  }else{
-    scene.add(gridHelper);
-  }
-  });
-  //GUI for label
 
-  for(var i=0;i<objects.length;i++){
-    objects[i].add(Labels[i]);
+	//GUI
+    var gui=new dat.GUI();
+    var controls = new function(){
+    this.LABEL=true;
   }
-  allGui.add(controls,'label').onChange(function(e){
+
+    for(var i = 0;i<objects.length;i++){
+    objects[i].add(labels[i]);
+  }
+    gui.add(controls,'LABEL').onChange(function(e){
     if(e){
-      for(var i=0;i<objects.length;i++){
-        objects[i].add(Labels[i]);
+      for(var i = 0;i<objects.length;i++){
+        objects[i].add(labels[i]);
       }
     }else{
-      for(var i=0;i<objects.length;i++){
-        objects[i].remove(Labels[i]);
+      for(var i = 0;i<objects.length;i++){
+        objects[i].remove(labels[i]);
       }
     }
   });

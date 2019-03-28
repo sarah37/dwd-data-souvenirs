@@ -1,9 +1,12 @@
 // date formatting + parsing
 var prettyDate = d3.timeFormat("%d %B %Y"); // e.g. 01 August 2018
 var parseDate = d3.timeParse("%Y-%m-%d") //e.g. 2018-08-01
+var parseISO = d3.timeParse("%Y-%m-%d %H:%M:%S");
+
+var date_from = '2018-08-01+00:00:00';
+var date_to = '2018-08-31+23:59:59';
 
 function starList() {
-	console.log(selectedEvents)
 
 	for (var i = 0; i < selectedEvents.length; i++) {
 		selectedEvents[i].starred = false;
@@ -28,8 +31,7 @@ function starList() {
 }
 
 function updateCards(data) {
-	var date_from = $('#date_from').val() + '+00:00:00';
-	var date_to = $('#date_to').val() + '+23:59:59';
+
 	var params = {title: $('#title').val(),
 		artist: $('#artist').val(),
 		venue: $('#venue').val()}
@@ -40,8 +42,6 @@ function updateCards(data) {
 
 	var str = 'year=2018&date_from=' + date_from + '&date_to=' + date_to +
 	'&' + $.param( params );
-
-	console.log(str)
 
 	$.ajax({
 		type: "POST", //AJAX type is "Post".
@@ -62,7 +62,6 @@ function updateCards(data) {
 
 function drawCards(data) {
 	var events = JSON.parse(data)
-	console.log(events)
 
 	var div = d3.select('#eventoutput')
 	div.selectAll('*').remove()
@@ -91,9 +90,9 @@ function drawCards(data) {
 		.classed('card-text', true)
 		.html(function(d) {
 		var dates = d.performances.filter(function(p) {
-			var min = d3.isoParse(document.getElementById('date_from').value)
-			var max = d3.isoParse(document.getElementById('date_to').value)
-			var now = d3.isoParse(p.start)
+			var min = parseISO('2018-08-01 00:00:00').getTime()
+			var max = parseISO('2018-08-31 23:59:59').getTime()
+			var now = parseISO(p.start).getTime()
 			return ((now >= min) && (now <= max))
 		})
 		return 	'<h2 class="date">' + prettyDate(d3.isoParse(dates[0].start)) + '</h2>' +
@@ -133,7 +132,6 @@ function drawCards(data) {
 						d3.select('#card' + d.code).select('.card-button').text('+ select')
 					})
 			}
-		console.log(selectedEvents)
 	})
 
 }

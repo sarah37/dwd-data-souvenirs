@@ -1,6 +1,7 @@
-function drawVis(events) {
+var anim;
+var renderer;
 
-	console.log(events)
+function drawVis(events) {
 
 	var width = window.innerWidth;
 	var height = window.innerHeight - 60;
@@ -49,7 +50,7 @@ function drawVis(events) {
 	orbitControls.autoRotate = true
 
 	// SET UP RENDERER
-	var renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({preserveDrawingBuffer: true});
 	renderer.setSize( width, height );
 	document.getElementById('canvas').appendChild( renderer.domElement );
 
@@ -100,8 +101,8 @@ function drawVis(events) {
 		var sphere = new THREE.Mesh( geometry, material );
 		sphere.position.x = ev.pos[0]-512 //front-back
 		sphere.position.z = ev.pos[1]-512 //left-right
-		if(timeScale(d3.isoParse(ev.performances[0].start))>-600 && timeScale(d3.isoParse(ev.performances[0].start))<900) {
-			sphere.position.y = timeScale(d3.isoParse(ev.performances[0].start)) - 260//vertical
+		if(timeScale(parseISO(ev.performances[0].start))>-600 && timeScale(parseISO(ev.performances[0].start))<900) {
+			sphere.position.y = timeScale(parseISO(ev.performances[0].start)) - 260//vertical
 			objects.push(sphere);
 			scene.add(sphere);
 
@@ -150,7 +151,9 @@ function drawVis(events) {
 
 	    // Create a closed wavey loop
 	    var curvespositions = [];
+	    console.log(objects)
 	    objects.forEach(function(cu) { curvespositions.push(cu.position) })
+	    console.log(curvespositions)
 	    var curve = new THREE.CatmullRomCurve3(curvespositions);
 	    var points = curve.getPoints( events.length * 10 );
 	    var geometry = new THREE.BufferGeometry().setFromPoints( points );
@@ -193,7 +196,6 @@ function drawVis(events) {
 	}
 
 	var wpoints1 = new THREE.Points(geometry1, material2)
-	console.log(wpoints1);
 	scene.add(wpoints1);
 
 	// To make sure that the matrixWorld is up to date for the boxhelpers
@@ -250,7 +252,7 @@ function drawVis(events) {
 
 	// animate/render loop
 	var animate = function () {
-		requestAnimationFrame( animate );
+		anim = requestAnimationFrame( animate );
 		renderer.setClearColor(0x232323,1.0);
 		for(var i = 0; i < sats.length;i++) {
 

@@ -34,6 +34,10 @@ p {
   font-size: 22px;
 }
 
+.hidden {
+	display: none;
+}
+
 .section {
   height: 100vh;
 }
@@ -142,7 +146,7 @@ button.next-button, button.next-button:hover, button.next-button:focus {
 
 /* sections */
 
-#section-3-a, #prev-3-a, #next-3-a, #section-4, #prev-4, #next-4, #section-5 {
+#section-3-a, #prev-3-a, #next-3-a, #section-4, #prev-4, #next-4, #section-5, #section-6 {
   display: none;
 }
 
@@ -473,30 +477,13 @@ canvas {
 	height: 100%;
 }
 
+#print {
+	display: inline-block;
+	/*margin: 5%;*/
+	border: #ccc solid 1px;
+}
 
-/*print css 152.4mm 101.6mm */
-@media print {
-  p {
-    color: #fff;
-  }
-  .print-bit {
-    background-color: #232323;
-    height: 40%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 0;
-    }
-  .nav, h1 {
-    display: none;
-  }
-  canvas {
-    min-height: 100%;
-    max-width: 100%;
-    max-height: 50%;
-    height: auto;
-    width: auto!important;
-    transform: rotate(180deg); /* Equal to rotateZ(45deg) */
-  }
+#print img {
+	object-fit: cover;
+	transform: rotate(180deg);
 }

@@ -7,9 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Bootstrap/JQuery -->
-	<script src="../lib/jquery-3.3.1.min.js" type="text/javascript"></script>
-	<script src="../lib/bootstrap.min.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="../lib/bootstrap.min.css">
+	<script src="/lib/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="/lib/bootstrap.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="/lib/bootstrap.min.css">
 
 	<!-- Stylesheet + fonts -->
 	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css"/>
@@ -67,18 +67,18 @@
 					<div class="row">
 						<form>
 							<div class="row">
-								<div class="col-md-3">
+								<!-- <div class="col-md-3">
 									<h2>Date</h2>
 									<input type="date" class="date" value="2018-08-01" min="2018-08-01" max="2018-08-31" id="date_from"> --
 									<input type="date" class="date" value="2018-08-31" min="2018-08-01" max="2018-08-31" id="date_to">
-								</div>
-								<div class="col-md-3">
+								</div> -->
+								<div class="col-md-4">
 									<h2>Title</h2><input type='text' name='title' id='title'>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<h2>Artist</h2><input type='text' name='artist' id='artist'>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<h2>Venue</h2><input type='text' name='venue' id='venue'>
 								</div>
 							</div>
@@ -126,10 +126,21 @@
 	</div>
 
 	<div id="section-5" class="container-5">
-		<div class="container">
-			<div class="row">
+		<!-- <div class="container"> -->
+			<!-- <div class="row">
 				<div class="col col-md-12">
 					<h1>Print</h1>
+				</div> -->
+				<div id='print'></div>
+			<!-- </div> -->
+		<!-- </div> -->
+	</div>
+
+	<div id='section-6' class='container-6'>
+		<div class='container'>
+			<div class='row'>
+				<div class="col col-md-12">
+					<h1>Thank you! Please wait for your print to complete and collect it below.</h1>
 				</div>
 			</div>
 		</div>

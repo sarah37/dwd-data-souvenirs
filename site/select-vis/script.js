@@ -56,12 +56,63 @@ $(document).ready(function(){
 
 		$("#section-5").show();
 
+		$(".nav").hide()
 
-    document.getElementById("dot-1").style.border = "6px solid #2B2B2B";
-    document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
-    document.getElementById("dot-3").style.border = "6px solid #fff";
-    // set timer to reload after 15s
-    setTimeout(function() {window.location.assign('../')}, 10000)
+
+	    document.getElementById("dot-1").style.border = "6px solid #2B2B2B";
+	    document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
+	    document.getElementById("dot-3").style.border = "6px solid #fff";
+	    
+
+    	// halt animation
+		cancelAnimationFrame( anim );
+
+		// d3.selectAll('.nav, h1').classed('hidden', true)
+		// var dataUrl = d3.select('#canvas>canvas').node().toDataURL();
+		var dataUrl = renderer.domElement.toDataURL()
+
+		// var ratio = window.innerHeight / window.innerWidth
+		// if (ratio < (13/19)) {
+		// 	// height is the limit
+		// 	var h = window.innerHeight * 0.9;
+		// 	var w = h / 13 * 19;
+		// 	// console.log(ratio, w, h, h/w)
+		// }
+		// else {
+		// 	var w = window.innerWidth * 0.9;
+		// 	var h = w / 19 * 13
+		// }
+		
+		d3.select('#print')
+			.append('img')
+			.style('height', '11cm')
+			.style('width', '18cm')
+			.attr('src', dataUrl)
+			// .style('background-position', 'center')
+			// .style('background-repeat', 'no-repeat')
+			// .style('background-size', 'cover');
+
+		d3.select('body').style('background-color', '#fff').style('text-align', 'center')
+
+	// actually print
+
+	window.print()
+	// set timer to reload after 15s
+    setTimeout(function() {window.location.assign('/')}, 30000)
+
+	// setTimeout(function () {
+	// 		console.log('move to waiting page')
+	// 		// take user to waiting page
+	// 		d3.select('body').style('background-color', '#000')
+
+	// 		$('#section-5').hide()
+	// 		$('#section-6').show()
+
+
+	// }, 30000);
+
+	//  } ,200)
+	
 	});
 
   $("#prev-4").click(function(){

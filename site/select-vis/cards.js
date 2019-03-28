@@ -2,6 +2,31 @@
 var prettyDate = d3.timeFormat("%d %B %Y"); // e.g. 01 August 2018
 var parseDate = d3.timeParse("%Y-%m-%d") //e.g. 2018-08-01
 
+function starList() {
+	console.log(selectedEvents)
+
+	for (var i = 0; i < selectedEvents.length; i++) {
+		selectedEvents[i].starred = false;
+	}
+
+	var divs = d3.select('#starlist')
+		.selectAll('div')
+		.data(selectedEvents)
+		.enter()
+		.append('div')
+		.classed('starcard', true)
+		.html(d => d.title)
+
+	var stars = divs.append('div')
+		.classed('star', true) //black &#9733; ☆	White Star	&#9734;
+		.html('&#9733;')
+	divs.on('click', function(d,i) {
+			selectedEvents[i].starred = !selectedEvents[i].starred;
+			d3.select(this)
+				.classed('selected', !d3.select(this).classed('selected'))
+		})
+}
+
 function updateCards(data) {
 	var date_from = $('#date_from').val() + '+00:00:00';
 	var date_to = $('#date_to').val() + '+23:59:59';

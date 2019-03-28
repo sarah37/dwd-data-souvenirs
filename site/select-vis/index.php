@@ -23,12 +23,13 @@
 
 	<!-- vis -->
 	<script src="vis/js/three.js"></script>
-	<script src="vis/js/controls/OrbitControls.js"></script>
+	<script src="select-vis/vis/js/controls/OrbitControls.js"></script>
 	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
 	<script src="vis/js/WebGL.js"></script>
 	<script src="vis/js/renderers/CSS2DRenderer.js"></script>
 	<script src="vis/js/geometries/hilbert3D.js"></script>
-    <script src ="vis/js/libs/dat.gui.min.js"></script>
+  <script src ="vis/js/libs/dat.gui.min.js"></script>
+
 	<script type="text/javascript" src='vis/vis.js'></script>
 
 
@@ -111,8 +112,7 @@
 				<div class="col col-md-12">
 					<h1>Star your favourite events</h1>
 				</div>
-				<div class="col col-md-12" id='starlist'>
-					
+				<div class="col col-md-12 star-container" id='starlist'>
 				</div>
 			</div>
 		</div>
@@ -145,7 +145,7 @@
 
 		d3.selectAll('#date_from, #date_to, #title, #artist, #venue')
 			.on('keyup', delay(function() {
-				updateCards()				
+				updateCards()
 			}, 400))
 
 		function delay(callback, ms) {

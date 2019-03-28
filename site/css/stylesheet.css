@@ -476,23 +476,27 @@ canvas {
 
 /*print css 152.4mm 101.6mm */
 @media print {
+  p {
+    color: #fff;
+  }
   .print-bit {
-    width: 152.4mm;
-    height: 101.6mm;
-    background-color: #000;
-  }
-  @page {
-  	size: 152.4mm 101.6mm landscape;
-  	max-height: 100%;
-  	max-width: 100%;
-  }
-  #canvas {
-  	width: 100%;
-  	height: 100%;
-  	display: block;
-	}
+    background-color: #232323;
+    height: 40%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    }
   .nav, h1 {
     display: none;
   }
-
+  canvas {
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 50%;
+    height: auto;
+    width: auto!important;
+    transform: rotate(180deg); /* Equal to rotateZ(45deg) */
+  }
 }

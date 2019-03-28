@@ -120,7 +120,9 @@
 
 	<div id="section-4" class="container-4">
 		<h1>Select a view for print</h1>
-		<div id='canvas'></div>
+		<div class="print-bit">
+			<div id='canvas'></div>
+		</div>
 	</div>
 
 	<div id="section-5" class="container-5">

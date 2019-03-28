@@ -472,3 +472,27 @@ canvas {
 	width: 100%;
 	height: 100%;
 }
+
+
+/*print css 152.4mm 101.6mm */
+@media print {
+  .print-bit {
+    width: 152.4mm;
+    height: 101.6mm;
+    background-color: #000;
+  }
+  @page {
+  	size: 152.4mm 101.6mm landscape;
+  	max-height: 100%;
+  	max-width: 100%;
+  }
+  #canvas {
+  	width: 100%;
+  	height: 100%;
+  	display: block;
+	}
+  .nav, h1 {
+    display: none;
+  }
+
+}

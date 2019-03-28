@@ -28,6 +28,7 @@
 	<script src="vis/js/WebGL.js"></script>
 	<script src="vis/js/renderers/CSS2DRenderer.js"></script>
 	<script src="vis/js/geometries/hilbert3D.js"></script>
+    <script src ="vis/js/libs/dat.gui.min.js"></script>
 	<script type="text/javascript" src='vis/vis.js'></script>
 
 
@@ -118,14 +119,8 @@
 	</div>
 
 	<div id="section-4" class="container-4">
-		<div class="container">
-			<div class="row">
-				<div class="col col-md-12">
-					<h1>Select a view for print</h1>
-				</div>
-			</div>
-		</div>
-		
+		<h1>Select a view for print</h1>
+		<div id='canvas'></div>
 	</div>
 
 	<div id="section-5" class="container-5">

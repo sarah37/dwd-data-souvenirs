@@ -61,7 +61,7 @@ $(document).ready(function(){
     document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
     document.getElementById("dot-3").style.border = "6px solid #fff";
     // set timer to reload after 15s
-    setTimeout(function() {window.location.assign('index.html')}, 10000)
+    setTimeout(function() {window.location.assign('../')}, 10000)
 	});
 
   $("#prev-4").click(function(){
@@ -77,6 +77,9 @@ $(document).ready(function(){
     document.getElementById("dot-1").style.border = "6px solid #fff";
     document.getElementById("dot-2").style.border = "6px solid #2B2B2B";
     document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
+
+    // empty canvas div
+    d3.select('#canvas').selectAll('*').remove();
   });
 
 	// page 5 has no buttons

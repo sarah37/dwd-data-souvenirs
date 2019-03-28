@@ -2,6 +2,9 @@ function drawVis(events) {
 
 	console.log(events)
 
+	var width = window.innerWidth;
+	var height = window.innerHeight - 60;
+
 	// set min and max date
 	var thisyear = 2018
 	var parseDate = d3.timeParse("%d/%m/%Y");
@@ -24,7 +27,7 @@ function drawVis(events) {
 	var scene = new THREE.Scene();
 
 	// SET UP CAMERA
-	var camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 10000);
+	var camera = new THREE.PerspectiveCamera( 60, width/height, 0.1, 10000);
 	camera.position.x = 1500
 	camera.position.y = 0
 	camera.position.z = 1100
@@ -47,8 +50,8 @@ function drawVis(events) {
 
 	// SET UP RENDERER
 	var renderer = new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.getElementById('section-4').appendChild( renderer.domElement );
+	renderer.setSize( width, height );
+	document.getElementById('canvas').appendChild( renderer.domElement );
 
 	var clock = new THREE.Clock();
 
@@ -103,7 +106,7 @@ function drawVis(events) {
 			scene.add(sphere);
 
 			//labels
-			var titlelabel = document.createElement('div');
+			var titlelabel = d3.select('#canvas').append('div').node()
 			titlelabel.className = 'label';
 			titlelabel.textContent = ev.title;
 			titlelabel.style.marginTop = '-1em';
@@ -124,13 +127,13 @@ function drawVis(events) {
 			// labels.push(Label2);
 
 			labelRenderer = new THREE.CSS2DRenderer();
-			labelRenderer.setSize( window.innerWidth, window.innerHeight );
+			labelRenderer.setSize( width, height );
 			labelRenderer.domElement.style.position = 'absolute';
 			labelRenderer.domElement.style.top = 0;
 			labelRenderer.domElement.style.opacity = '0.5';
 			labelRenderer.domElement.style.fontFamily = 'Roboto,sans-serif';
 			labelRenderer.domElement.style.fontWeight = '100';
-			document.body.appendChild( labelRenderer.domElement );
+			document.getElementById('canvas').appendChild( labelRenderer.domElement );
 
 			var satgeometry = new THREE.TetrahedronGeometry(5, 0);
 			var satmaterial = new THREE.MeshBasicMaterial({
@@ -201,12 +204,15 @@ function drawVis(events) {
 
 
 	//GUI
-    var gui=new dat.GUI();
-	gui.domElement.style = "color:#fff001";//yellow
-	var controls = new function(){
-    this.LABEL=true;
-    this.OVERVIEW=false;
-  }
+	// this broke everything please do not uncomment!! 
+ //    var gui = new dat.GUI({autoPlace: false});
+	// gui.domElement.style = "color:#fff001";//yellow
+	// var controls = new function(){
+	//     this.LABEL = true;
+	//     this.OVERVIEW = false;
+	// }
+	// $('#canvas').append($(gui.domElement))
+  
 
     for(var i = 0;i<objects.length;i++){
     objects[i].add(labels[i]);
@@ -226,23 +232,14 @@ function drawVis(events) {
   gui.add(controls,'OVERVIEW').onChange(function(e){
     if(e){
       //camera1
-      camera = new THREE.OrthographicCamera( window.innerWidth/-1.3, window.innerWidth/1.3, window.innerHeight/1.3,  window.innerHeight/-1.3, 1, 10000 );
+      camera = new THREE.OrthographicCamera( width/-1.3, width/1.3, height/1.3,  height/-1.3, 1, 10000 );
       camera.position.x = 0
       camera.position.y = -200
       camera.position.z = 0
       camera.rotation.x=-0.5 * Math.PI;
-      // var orbitControls = new THREE.OrbitControls(camera)
-      // orbitControls.autoRotate = true
 
-      //camera2
-      // camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 10000);
-      // camera.position.x = 0
-      // camera.position.y = 1000
-      // camera.position.z = 0
-      // var orbitControls = new THREE.OrbitControls(camera)
-      // orbitControls.autoRotate = true
     }else{
-      camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 10000);
+      camera = new THREE.PerspectiveCamera( 60, width/height, 0.1, 10000);
       camera.position.x = 1500
       camera.position.y = 0
       camera.position.z = 1100

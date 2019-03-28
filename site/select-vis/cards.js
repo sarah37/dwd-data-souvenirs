@@ -84,7 +84,6 @@ function drawCards(data) {
 		.style('background-image', function(d) {
 		var imgs = Object.values(d.images)
 		var index = 0
-		return imgs[index].versions['original'].url
 		return 'url("' + imgs[index].versions['original'].url + '")'
 		})
 

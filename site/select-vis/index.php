@@ -19,18 +19,18 @@
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 	<script src="https://unpkg.com/topojson@3"></script>
 
-	<script type="text/javascript" src='cards.js'></script>
+	<script type="text/javascript" src='/select-vis/cards.js'></script>
 
 	<!-- vis -->
-	<script src="vis/js/three.js"></script>
-	<script src="vis/js/controls/OrbitControls.js"></script>
+	<script src="/select-vis/vis/js/three.js"></script>
+	<script src="/select-vis/vis/js/controls/OrbitControls.js"></script>
 	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
-	<script src="vis/js/WebGL.js"></script>
-	<script src="vis/js/renderers/CSS2DRenderer.js"></script>
-	<script src="vis/js/geometries/hilbert3D.js"></script>
-  <script src ="vis/js/libs/dat.gui.min.js"></script>
+	<script src="/select-vis/vis/js/WebGL.js"></script>
+	<script src="/select-vis/vis/js/renderers/CSS2DRenderer.js"></script>
+	<script src="/select-vis/vis/js/geometries/hilbert3D.js"></script>
+  <script src ="/select-vis/vis/js/libs/dat.gui.min.js"></script>
 
-	<script type="text/javascript" src='vis/vis.js'></script>
+	<script type="text/javascript" src='/select-vis/vis/vis.js'></script>
 
 
 </head>
@@ -133,7 +133,7 @@
 		</div>
 	</div>
 
-	<script src="script.js"></script>
+	<script src="/select-vis/script.js"></script>
 
 
 	<script type="text/javascript">

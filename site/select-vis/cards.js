@@ -45,7 +45,7 @@ function updateCards(data) {
 
 	$.ajax({
 		type: "POST", //AJAX type is "Post".
-		url: "php/api.php", //Data will be sent to "api.php".
+		url: "/select-vis/php/api.php", //Data will be sent to "api.php".
 		data: {
 			query: str
 			//Assigning value of "name" into "search" variable.

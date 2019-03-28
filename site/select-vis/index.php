@@ -23,7 +23,7 @@
 
 	<!-- vis -->
 	<script src="vis/js/three.js"></script>
-	<script src="select-vis/vis/js/controls/OrbitControls.js"></script>
+	<script src="vis/js/controls/OrbitControls.js"></script>
 	<script src="https://threejs.org/examples/js/loaders/OBJLoader.js"></script>
 	<script src="vis/js/WebGL.js"></script>
 	<script src="vis/js/renderers/CSS2DRenderer.js"></script>

@@ -71,14 +71,14 @@ function drawVis(events) {
 	// plane.rotation.y = -0.1 * Math.PI
 	scene.add( plane );
 
-	// draw red cube at origin for orientation
-	var geometry = new THREE.BoxGeometry(10,10,10)
-	var material = new THREE.MeshNormalMaterial();
-	var cube = new THREE.Mesh(geometry, material)
-	cube.position.x=0;
-	cube.position.y=0;
-	cube.position.z=0;
-	scene.add(cube)
+	// // draw red cube at origin for orientation
+	// var geometry = new THREE.BoxGeometry(10,10,10)
+	// var material = new THREE.MeshNormalMaterial();
+	// var cube = new THREE.Mesh(geometry, material)
+	// cube.position.x=0;
+	// cube.position.y=0;
+	// cube.position.z=0;
+	// scene.add(cube)
 
 
     events.sort(function(x, y){
@@ -203,52 +203,50 @@ function drawVis(events) {
 	scene.add( box );
 
 
-	//GUI
-	// this broke everything please do not uncomment!! 
- //    var gui = new dat.GUI({autoPlace: false});
-	// gui.domElement.style = "color:#fff001";//yellow
-	// var controls = new function(){
-	//     this.LABEL = true;
-	//     this.OVERVIEW = false;
-	// }
-	// $('#canvas').append($(gui.domElement))
+	// GUI - this broke stuff so please do not add it back in
+	// 
   
+	// add labels to event cubes
+	for(var i = 0;i<objects.length;i++) {
+		objects[i].add(labels[i]);
+	}
 
-    for(var i = 0;i<objects.length;i++){
-    objects[i].add(labels[i]);
-  }
-    gui.add(controls,'LABEL').onChange(function(e){
-    if(e){
-      for(var i = 0;i<objects.length;i++){
-        objects[i].add(labels[i]);
-      }
-    }else{
-      for(var i = 0;i<objects.length;i++){
-        objects[i].remove(labels[i]);
-      }
-    }
-  });
-//camera control
-  gui.add(controls,'OVERVIEW').onChange(function(e){
-    if(e){
-      //camera1
-      camera = new THREE.OrthographicCamera( width/-1.3, width/1.3, height/1.3,  height/-1.3, 1, 10000 );
-      camera.position.x = 0
-      camera.position.y = -200
-      camera.position.z = 0
-      camera.rotation.x=-0.5 * Math.PI;
+	// checkbox for labels on/off
+	// d3.select('#control-labels').on('change', function() {
+	// 	var e = this.value;
+	// 	if (e) {
+	// 		for (var i = 0;i<objects.length;i++) {
+	// 			objects[i].add(labels[i]);
+	// 		}
+	// 	}
+	// 	else {
+	// 		for (var i = 0;i<objects.length;i++) {
+	// 			objects[i].remove(labels[i]);
+	// 		}
+	// 	}
+	// })
+    
+	// //camera control
+	// d3.select('#control-overview').on('change', function() {
+	// 	var e = this.value;
+	// 	if(e){
+	// 		//camera1
+	// 		camera = new THREE.OrthographicCamera( width/-1.3, width/1.3, height/1.3,  height/-1.3, 1, 10000 );
+	// 		camera.position.x = 0
+	// 		camera.position.y = -200
+	// 		camera.position.z = 0
+	// 		camera.rotation.x=-0.5 * Math.PI;
+	// 	}
+	// 	else {
+	// 		camera = new THREE.PerspectiveCamera( 60, width/height, 0.1, 10000);
+	// 		camera.position.x = 1500
+	// 		camera.position.y = 0
+	// 		camera.position.z = 1100
+	// 		var orbitControls = new THREE.OrbitControls(camera)
+	// 		orbitControls.autoRotate = true
 
-    }else{
-      camera = new THREE.PerspectiveCamera( 60, width/height, 0.1, 10000);
-      camera.position.x = 1500
-      camera.position.y = 0
-      camera.position.z = 1100
-      var orbitControls = new THREE.OrbitControls(camera)
-      orbitControls.autoRotate = true
-
-    }
-  });
-	// // var step = 0
+	// 	}
+	// });
 
 	// animate/render loop
 	var animate = function () {

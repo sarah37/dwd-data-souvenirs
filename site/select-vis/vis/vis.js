@@ -122,9 +122,7 @@ function drawVis(events) {
 		// datelabel.textContent = ev.performances[0].start;
 		// datelabel.style.marginTop = '-1em';
 		
-		if (ev.starred) {
-			// add decorations to starred events here
-		}
+
 
 		var Label1 = new THREE.CSS2DObject(titlelabel);
 		Label1.position.set(0, 50, 0);
@@ -151,9 +149,12 @@ function drawVis(events) {
 		})
 		var  sat = new THREE.Mesh( satgeometry, satmaterial );
 		sat.position.set(Math.random() * 50, 0, Math.random() * 50);
+      if (ev.starred) {
+        // add decorations to starred events here
+        sphere.add(sat);
+        sats.push(sat);
+      }
 
-		sphere.add(sat);
-		sats.push(sat);
 		}
 
     }) // end events forEach

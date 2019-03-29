@@ -91,86 +91,92 @@ function drawVis(events) {
 	var objects = [];
 	var sats=[];
     var labels=[];
-    events.forEach(function(ev) {
-    	ev.pos = projection([ev.longitude, ev.latitude])
 
-      var testcolor = new THREE.Color("hsl(10,100%,50%");
+    events.forEach(function(ev) {
+		ev.pos = projection([ev.longitude, ev.latitude])
+
+		var testcolor = new THREE.Color("hsl(10,100%,50%");
 
 		if(timeScale(parseISO(ev.performances[0].start))>=0 && timeScale(parseISO(ev.performances[0].start))<=900) {
-      var geometry = new THREE.OctahedronGeometry(30, 0);
-      var material = new THREE.MeshLambertMaterial({
-        color: Math.random()*0x3f33f3*timeScale(parseISO(ev.performances[0].start))/900,wireframe:false
-      })
-      var sphere = new THREE.Mesh( geometry, material );
-      sphere.position.x = ev.pos[0]-512 //front-back
-      sphere.position.z = ev.pos[1]-512 //left-right
-			sphere.position.y = timeScale(parseISO(ev.performances[0].start)) - 450//vertical
-			objects.push(sphere);
-			scene.add(sphere);
+    		var geometry = new THREE.OctahedronGeometry(30, 0);
+    		var material = new THREE.MeshLambertMaterial({
+    			color: Math.random()*0x3f33f3*timeScale(parseISO(ev.performances[0].start))/900,wireframe:false
+    		})
 
-			//labels
-			var titlelabel = d3.select('#canvas').append('div').node()
-			titlelabel.className = 'label';
-			titlelabel.textContent = ev.title;
-			titlelabel.style.marginTop = '-1em';
+    	var sphere = new THREE.Mesh( geometry, material );
 
-			// var datelabel = document.createElement('div');
-			// datelabel.className = 'label';
-			// datelabel.textContent = ev.performances[0].start;
-			// datelabel.style.marginTop = '-1em';
+		sphere.position.x = ev.pos[0]-512 //front-back
+		sphere.position.z = ev.pos[1]-512 //left-right
+		sphere.position.y = timeScale(parseISO(ev.performances[0].start)) - 450//vertical
+		objects.push(sphere);
+		scene.add(sphere);
 
-			var Label1 = new THREE.CSS2DObject(titlelabel);
-			Label1.position.set(0, 50, 0);
-			// sphere.add(Label1);
-			labels.push(Label1);
+		//labels
+		var titlelabel = d3.select('#canvas').append('div').node()
+		titlelabel.className = 'label';
+		titlelabel.textContent = ev.title;
+		titlelabel.style.marginTop = '-1em';
 
-			// var Label2 = new THREE.CSS2DObject(datelabel);
-			// Label2.position.set(0, 80, 0);
-			// // sphere.add(Label2);
-			// labels.push(Label2);
+		// var datelabel = document.createElement('div');
+		// datelabel.className = 'label';
+		// datelabel.textContent = ev.performances[0].start;
+		// datelabel.style.marginTop = '-1em';
+		
+		if (ev.starred) {
+			// add decorations to starred events here
+		}
 
-			labelRenderer = new THREE.CSS2DRenderer();
-			labelRenderer.setSize( width, height );
-			labelRenderer.domElement.style.position = 'absolute';
-			labelRenderer.domElement.style.top = 0;
-			labelRenderer.domElement.style.opacity = '0.5';
-			labelRenderer.domElement.style.fontFamily = 'Roboto,sans-serif';
-			labelRenderer.domElement.style.fontWeight = '100';
-			document.getElementById('canvas').appendChild( labelRenderer.domElement );
+		var Label1 = new THREE.CSS2DObject(titlelabel);
+		Label1.position.set(0, 50, 0);
+		// sphere.add(Label1);
+		labels.push(Label1);
 
-			var satgeometry = new THREE.TetrahedronGeometry(12, 0);
-			var satmaterial = new THREE.MeshLambertMaterial({
-				color: 0xfff001,wireframe:false
-			})
-			var  sat = new THREE.Mesh( satgeometry, satmaterial );
-			sat.position.set(Math.random() * 50, 0, Math.random() * 50);
+		// var Label2 = new THREE.CSS2DObject(datelabel);
+		// Label2.position.set(0, 80, 0);
+		// // sphere.add(Label2);
+		// labels.push(Label2);
 
-			sphere.add(sat);
-			sats.push(sat);
-			}
+		labelRenderer = new THREE.CSS2DRenderer();
+		labelRenderer.setSize( width, height );
+		labelRenderer.domElement.style.position = 'absolute';
+		labelRenderer.domElement.style.top = 0;
+		labelRenderer.domElement.style.opacity = '0.5';
+		labelRenderer.domElement.style.fontFamily = 'Roboto,sans-serif';
+		labelRenderer.domElement.style.fontWeight = '100';
+		document.getElementById('canvas').appendChild( labelRenderer.domElement );
 
-	    })
+		var satgeometry = new THREE.TetrahedronGeometry(12, 0);
+		var satmaterial = new THREE.MeshLambertMaterial({
+			color: 0xfff001,wireframe:false
+		})
+		var  sat = new THREE.Mesh( satgeometry, satmaterial );
+		sat.position.set(Math.random() * 50, 0, Math.random() * 50);
 
-	    // Create a closed wavey loop
-	    var curvespositions = [];
-	    console.log(objects)
-	    objects.forEach(function(cu) { curvespositions.push(cu.position) })
-	    console.log(curvespositions)
-	    var curve = new THREE.CatmullRomCurve3(curvespositions);
-	    var points = curve.getPoints( events.length * 10 );
-	    var geometry = new THREE.BufferGeometry().setFromPoints( points );
-	    var material = new THREE.LineDashedMaterial( { color: 0xffffff,dashSize: 20, gapSize: 5 } );
-		// 线的材质可以由2点的颜色决定
-		// var material = new THREE.LineBasicMaterial( { vertexColors: true } );
-		// var color1 = new THREE.Color( 0x444444 ), color2 = new THREE.Color( 0xFF0000 );
-		// geometry.vertices.push(p1);
-		// geometry.vertices.push(p2);
-		// geometry.colors.push( color1, color2 );
-	    // Create the final object to add to the scene
-	    var curveObject = new THREE.Line( geometry, material );
-	    curveObject.computeLineDistances();
-	    scene.add(curveObject);
-	// })
+		sphere.add(sat);
+		sats.push(sat);
+		}
+
+    }) // end events forEach
+
+	// Create a closed wavey loop
+	var curvespositions = [];
+	console.log(objects)
+	objects.forEach(function(cu) { curvespositions.push(cu.position) })
+	console.log(curvespositions)
+	var curve = new THREE.CatmullRomCurve3(curvespositions);
+	var points = curve.getPoints( events.length * 10 );
+	var geometry = new THREE.BufferGeometry().setFromPoints( points );
+	var material = new THREE.LineDashedMaterial( { color: 0xffffff,dashSize: 20, gapSize: 5 } );
+	// 线的材质可以由2点的颜色决定
+	// var material = new THREE.LineBasicMaterial( { vertexColors: true } );
+	// var color1 = new THREE.Color( 0x444444 ), color2 = new THREE.Color( 0xFF0000 );
+	// geometry.vertices.push(p1);
+	// geometry.vertices.push(p2);
+	// geometry.colors.push( color1, color2 );
+	// Create the final object to add to the scene
+	var curveObject = new THREE.Line( geometry, material );
+	curveObject.computeLineDistances();
+	scene.add(curveObject);
 
 	// light
 	// var light = new THREE.AmbientLight( 0x404040 ); // soft white light

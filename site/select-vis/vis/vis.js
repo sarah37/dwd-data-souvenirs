@@ -28,7 +28,7 @@ function drawVis(events) {
 	var scene = new THREE.Scene();
 
 	// SET UP CAMERA
-	var camera = new THREE.PerspectiveCamera( 60, width/height, 0.1, 10000);
+	var camera = new THREE.PerspectiveCamera( 52, width/height, 0.1, 10000);
 	camera.position.x = 1500
 	camera.position.y = 0
 	camera.position.z = 1100
@@ -94,15 +94,17 @@ function drawVis(events) {
     events.forEach(function(ev) {
     	ev.pos = projection([ev.longitude, ev.latitude])
 
-		var geometry = new THREE.OctahedronGeometry(20, 0);
-		var material = new THREE.MeshLambertMaterial({
-			color: Math.random() * 0x31f3ff,wireframe:false
-		})
-		var sphere = new THREE.Mesh( geometry, material );
-		sphere.position.x = ev.pos[0]-512 //front-back
-		sphere.position.z = ev.pos[1]-512 //left-right
-		if(timeScale(parseISO(ev.performances[0].start))>-600 && timeScale(parseISO(ev.performances[0].start))<900) {
-			sphere.position.y = timeScale(parseISO(ev.performances[0].start)) - 260//vertical
+      var testcolor = new THREE.Color("hsl(10,100%,50%");
+
+		if(timeScale(parseISO(ev.performances[0].start))>=0 && timeScale(parseISO(ev.performances[0].start))<=900) {
+      var geometry = new THREE.OctahedronGeometry(30, 0);
+      var material = new THREE.MeshLambertMaterial({
+        color: Math.random()*0x3f33f3*timeScale(parseISO(ev.performances[0].start))/900,wireframe:false
+      })
+      var sphere = new THREE.Mesh( geometry, material );
+      sphere.position.x = ev.pos[0]-512 //front-back
+      sphere.position.z = ev.pos[1]-512 //left-right
+			sphere.position.y = timeScale(parseISO(ev.performances[0].start)) - 450//vertical
 			objects.push(sphere);
 			scene.add(sphere);
 
@@ -136,8 +138,8 @@ function drawVis(events) {
 			labelRenderer.domElement.style.fontWeight = '100';
 			document.getElementById('canvas').appendChild( labelRenderer.domElement );
 
-			var satgeometry = new THREE.TetrahedronGeometry(5, 0);
-			var satmaterial = new THREE.MeshBasicMaterial({
+			var satgeometry = new THREE.TetrahedronGeometry(12, 0);
+			var satmaterial = new THREE.MeshLambertMaterial({
 				color: 0xfff001,wireframe:false
 			})
 			var  sat = new THREE.Mesh( satgeometry, satmaterial );
@@ -211,6 +213,15 @@ function drawVis(events) {
 	// add labels to event cubes
 	for(var i = 0;i<objects.length;i++) {
 		objects[i].add(labels[i]);
+
+    // var testcolor = new THREE.Color("hsl(199,100%,50%");
+    // var geometry = new THREE.OctahedronGeometry(28, 0);
+    // var material = new THREE.MeshLambertMaterial({
+    // 	color:testcolor,wireframe:false
+    // })
+    //  objects[i] = new THREE.Mesh( geometry, material );
+    //
+    // scene.add(sphere);
 	}
 
 	// checkbox for labels on/off

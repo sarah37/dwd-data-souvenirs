@@ -176,7 +176,7 @@ body.select-vis .dot-1 {
 .container-1 h1 {
   text-align: left;
   margin-bottom: 50px;
-  margin-top: 30vh;
+  margin-top: 25vh;
   font-size: 60px;
 }
 
@@ -194,11 +194,16 @@ body.select-vis .dot-1 {
 }
 
 video.myVideo {
-  height: 100%;
+  width: 100%;
   width: auto;
-  opacity: 0.3;
+  opacity: 0.8;
   float: right;
   position: absolute;
+  max-height: 100vh;
+}
+
+.container-1 {
+  background-color: #232223;
 }
 
 

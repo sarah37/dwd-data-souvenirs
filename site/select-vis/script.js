@@ -6,7 +6,6 @@ $(document).ready(function(){
       var scroll = $(window).scrollTop();
 
       if (scroll >= 130) {
-          //clearHeader, not clearheader - caps H
           $("#bar").addClass("fixed-bar");
       }
       else {
@@ -67,32 +66,15 @@ $(document).ready(function(){
     	// halt animation
 		cancelAnimationFrame( anim );
 
-		// d3.selectAll('.nav, h1').classed('hidden', true)
-		// var dataUrl = d3.select('#canvas>canvas').node().toDataURL();
 		var dataUrl = renderer.domElement.toDataURL()
-
-		// var ratio = window.innerHeight / window.innerWidth
-		// if (ratio < (13/19)) {
-		// 	// height is the limit
-		// 	var h = window.innerHeight * 0.9;
-		// 	var w = h / 13 * 19;
-		// 	// console.log(ratio, w, h, h/w)
-		// }
-		// else {
-		// 	var w = window.innerWidth * 0.9;
-		// 	var h = w / 19 * 13
-		// }
 		
 		d3.select('#print')
 			.append('img')
 			.style('height', '11cm')
 			.style('width', '18cm')
 			.attr('src', dataUrl)
-			// .style('background-position', 'center')
-			// .style('background-repeat', 'no-repeat')
-			// .style('background-size', 'cover');
-
-		d3.select('body').style('background-color', '#fff').style('text-align', 'center')
+	
+		d3.select('body').style('text-align', 'center')
 
 	// actually print
 

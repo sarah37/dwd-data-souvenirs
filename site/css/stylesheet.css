@@ -413,7 +413,7 @@ img.card-image {
   background-color: #7F2DE8;
 }
 
-.selected a.card-button {
+.selected .card-button {
   background-color: transparent;
 }
 
@@ -487,7 +487,7 @@ canvas {
 #print {
 	display: inline-block;
 	/*margin: 5%;*/
-	border: #ccc solid 1px;
+	/*border: #ccc solid 1px;*/
 }
 
 #print img {

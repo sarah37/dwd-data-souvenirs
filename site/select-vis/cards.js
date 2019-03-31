@@ -48,13 +48,8 @@ function updateCards(data) {
 		url: "/select-vis/php/api.php", //Data will be sent to "api.php".
 		data: {
 			query: str
-			//Assigning value of "name" into "search" variable.
-			// search: name
 			},
-			//If result found, this funtion will be called.
 		success: function(data) {
-			//Assigning result to "display" div in "search.php" file.
-			// $("#display").html(html).show();
 			drawCards(data)
 		}
 	});

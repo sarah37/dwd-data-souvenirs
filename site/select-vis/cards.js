@@ -101,8 +101,8 @@ function drawCards(data) {
 				'<h2 class="venue">'+ d.venue.name + '</h2>'
 		})
 
-	card.append('a')
-		.classed('card-button', true)
+	card.append('div')
+		.classed('card-button button', true)
 		.text('+ select')
 		.on('click', function(d) {
 			if (d3.select(this.parentNode).classed('selected')) {

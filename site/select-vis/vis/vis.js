@@ -22,8 +22,6 @@ function drawVis(events) {
 	const t = [7900, 154200]
 	const projection = d3.geoMercator().scale(s).translate(t);
 
-	////////////////////////////////////////////////////////////////////////////////
-
 	// SET UP SCENE
 	var scene = new THREE.Scene();
 
@@ -45,18 +43,18 @@ function drawVis(events) {
 	light2.position.set( -1000, 500, -2000 );
 	scene.add( light2 );
 
-	// initialize camera plugins to drag the camera
-	var orbitControls = new THREE.OrbitControls(camera)
-	orbitControls.autoRotate = true
-
 	// SET UP RENDERER
 	renderer = new THREE.WebGLRenderer({preserveDrawingBuffer: true});
 	renderer.setSize( width, height );
 	document.getElementById('canvas').appendChild( renderer.domElement );
 
+	// initialize camera plugins to drag the camera
+	var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
+	orbitControls.autoRotate = true
+
+
 	var clock = new THREE.Clock();
 
-	////////////////////////////////////////////////////////////////////////////////
 	//draw plane w/ map pictures
 	var planeGeometry = new THREE.PlaneBufferGeometry( 975, 975 );
 
@@ -72,16 +70,6 @@ function drawVis(events) {
 	// plane.rotation.y = -0.1 * Math.PI
 	scene.add( plane );
 
-	// // draw red cube at origin for orientation
-	// var geometry = new THREE.BoxGeometry(10,10,10)
-	// var material = new THREE.MeshNormalMaterial();
-	// var cube = new THREE.Mesh(geometry, material)
-	// cube.position.x=0;
-	// cube.position.y=0;
-	// cube.position.z=0;
-	// scene.add(cube)
-
-
     events.sort(function(x, y){
 		return d3.ascending(x.performances[0].start, y.performances[0].start);
 	})
@@ -95,7 +83,7 @@ function drawVis(events) {
     events.forEach(function(ev) {
 		ev.pos = projection([ev.longitude, ev.latitude])
 
-		var testcolor = new THREE.Color("hsl(10,100%,50%");
+		var testcolor = new THREE.Color("hsl(10,100%,50%)");
 
 		if(timeScale(parseISO(ev.performances[0].start))>=0 && timeScale(parseISO(ev.performances[0].start))<=900) {
     		var geometry = new THREE.OctahedronGeometry(30, 0);
@@ -117,22 +105,10 @@ function drawVis(events) {
 		titlelabel.textContent = ev.title;
 		titlelabel.style.marginTop = '-1em';
 
-		// var datelabel = document.createElement('div');
-		// datelabel.className = 'label';
-		// datelabel.textContent = ev.performances[0].start;
-		// datelabel.style.marginTop = '-1em';
-		
-
-
 		var Label1 = new THREE.CSS2DObject(titlelabel);
 		Label1.position.set(0, 50, 0);
 		// sphere.add(Label1);
 		labels.push(Label1);
-
-		// var Label2 = new THREE.CSS2DObject(datelabel);
-		// Label2.position.set(0, 80, 0);
-		// // sphere.add(Label2);
-		// labels.push(Label2);
 
 		labelRenderer = new THREE.CSS2DRenderer();
 		labelRenderer.setSize( width, height );
@@ -168,20 +144,11 @@ function drawVis(events) {
 	var points = curve.getPoints( events.length * 10 );
 	var geometry = new THREE.BufferGeometry().setFromPoints( points );
 	var material = new THREE.LineDashedMaterial( { color: 0xffffff,dashSize: 20, gapSize: 5 } );
-	// 线的材质可以由2点的颜色决定
-	// var material = new THREE.LineBasicMaterial( { vertexColors: true } );
-	// var color1 = new THREE.Color( 0x444444 ), color2 = new THREE.Color( 0xFF0000 );
-	// geometry.vertices.push(p1);
-	// geometry.vertices.push(p2);
-	// geometry.colors.push( color1, color2 );
+
 	// Create the final object to add to the scene
 	var curveObject = new THREE.Line( geometry, material );
 	curveObject.computeLineDistances();
 	scene.add(curveObject);
-
-	// light
-	// var light = new THREE.AmbientLight( 0x404040 ); // soft white light
-	// scene.add( light );
 
 	//white points at the corners
 	var geometry1= new THREE.Geometry()
@@ -213,60 +180,10 @@ function drawVis(events) {
 	var box = new THREE.BoxHelper(wpoints1, 0x565656  );
 	scene.add( box );
 
-
-	// GUI - this broke stuff so please do not add it back in
-	// 
-  
 	// add labels to event cubes
 	for(var i = 0;i<objects.length;i++) {
 		objects[i].add(labels[i]);
-
-    // var testcolor = new THREE.Color("hsl(199,100%,50%");
-    // var geometry = new THREE.OctahedronGeometry(28, 0);
-    // var material = new THREE.MeshLambertMaterial({
-    // 	color:testcolor,wireframe:false
-    // })
-    //  objects[i] = new THREE.Mesh( geometry, material );
-    //
-    // scene.add(sphere);
 	}
-
-	// checkbox for labels on/off
-	// d3.select('#control-labels').on('change', function() {
-	// 	var e = this.value;
-	// 	if (e) {
-	// 		for (var i = 0;i<objects.length;i++) {
-	// 			objects[i].add(labels[i]);
-	// 		}
-	// 	}
-	// 	else {
-	// 		for (var i = 0;i<objects.length;i++) {
-	// 			objects[i].remove(labels[i]);
-	// 		}
-	// 	}
-	// })
-    
-	// //camera control
-	// d3.select('#control-overview').on('change', function() {
-	// 	var e = this.value;
-	// 	if(e){
-	// 		//camera1
-	// 		camera = new THREE.OrthographicCamera( width/-1.3, width/1.3, height/1.3,  height/-1.3, 1, 10000 );
-	// 		camera.position.x = 0
-	// 		camera.position.y = -200
-	// 		camera.position.z = 0
-	// 		camera.rotation.x=-0.5 * Math.PI;
-	// 	}
-	// 	else {
-	// 		camera = new THREE.PerspectiveCamera( 60, width/height, 0.1, 10000);
-	// 		camera.position.x = 1500
-	// 		camera.position.y = 0
-	// 		camera.position.z = 1100
-	// 		var orbitControls = new THREE.OrbitControls(camera)
-	// 		orbitControls.autoRotate = true
-
-	// 	}
-	// });
 
 	// animate/render loop
 	var animate = function () {
@@ -280,16 +197,6 @@ function drawVis(events) {
 			sats[i].rotation.x += 0.001;
 			sats[i].rotation.y += 0.001;
 		}
-		//background color
-		// cube.rotation.x += 0.01;
-		// cube.rotation.y += 0.01;
-		// step += 0.0001;
-		// points2.rotation.y -= 0.0006;
-		//points3.rotation.y -=0.0003;
-		// wpoints1.rotation.x = step;
-		// wpoints1.rotation.y = step;
-		// wpoints1.rotation.z = step;
-
 
 		renderer.render( scene, camera );
 
@@ -297,6 +204,5 @@ function drawVis(events) {
   };
 
 	animate();
-
 
 }

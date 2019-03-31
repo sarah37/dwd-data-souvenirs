@@ -5,6 +5,8 @@
 	<title>Design with Data</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
 
 	<!-- Bootstrap/JQuery -->
 	<script src="/lib/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -38,7 +40,8 @@
 
 
 	<div id="nav" class="nav">
-		<a href="../instructions" id="prev-3" class="prev-button">Prev</a>
+		<div id='prev-3' class="prev-button button" onclick="window.location='../instructions';">Prev</div>
+		<!-- <a href="../instructions" id="prev-3" class="prev-button">Prev</a> -->
 		<button id="prev-3-a" class="prev-button">Prev</button>
 		<button id="prev-4" class="prev-button">Prev</button>
 		<div class="dots">

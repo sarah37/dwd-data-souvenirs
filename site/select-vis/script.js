@@ -30,6 +30,7 @@ $(document).ready(function(){
     document.getElementById("dot-3").style.border = "6px solid #2B2B2B";
 
     starList(selectedEvents)
+    window.scrollTo(0,0);
 	});
 
   $("#prev-3-a").click(function(){
@@ -75,6 +76,8 @@ $(document).ready(function(){
 			.attr('src', dataUrl)
 	
 		d3.select('body').style('text-align', 'center')
+		document.body.style.position = 'static'
+
 
 	// actually print
 
@@ -113,6 +116,7 @@ $(document).ready(function(){
 
     // empty canvas div
     d3.select('#canvas').selectAll('*').remove();
+    d3.selectAll('.label').remove();
   });
 
 	// page 5 has no buttons
@@ -133,6 +137,8 @@ $('#next-3-a').click(function() {
 
 	console.log('drawing vis now: ', selectedEvents)
 	drawVis(selectedEvents)
+	document.body.style.touchAction = 'none';
+	document.body.style.position = 'fixed'
 });
 
 

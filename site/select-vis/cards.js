@@ -90,7 +90,7 @@ function drawCards(data) {
 			var now = parseISO(p.start).getTime()
 			return ((now >= min) && (now <= max))
 		})
-		return 	'<h2 class="date">' + prettyDate(d3.isoParse(dates[0].start)) + '</h2>' +
+		return 	'<h2 class="date">' + prettyDate(parseISO(dates[dates.length - 1].start)) + '</h2>' +
 				'<h2 class="title">'+ d.title + '</h2>' +
 				'<h2 class="artist">' + (d.artist ? d.artist : 'Unknown') + '</h2>' +
 				'<h2 class="venue">'+ d.venue.name + '</h2>'

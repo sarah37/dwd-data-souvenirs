@@ -48,9 +48,7 @@ function drawVis(events) {
 	renderer.setSize( width, height );
 	document.getElementById('canvas').appendChild( renderer.domElement );
 
-	// initialize camera plugins to drag the camera
-	var orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
-	orbitControls.autoRotate = true
+
 
 
 	var clock = new THREE.Clock();
@@ -58,8 +56,9 @@ function drawVis(events) {
 	//draw plane w/ map pictures
 	var planeGeometry = new THREE.PlaneBufferGeometry( 975, 975 );
 
-	var texture = THREE.ImageUtils.loadTexture("vis/pic/map3.png",null,function(t)
-	{});
+	// var texture = THREE.ImageUtils.loadTexture("vis/pic/map3.png",null,function(t)
+	// {});
+	var texture = new THREE.TextureLoader().load("vis/pic/map3.png")
 	var material5 = new THREE.MeshBasicMaterial({map:texture,
 		side:THREE.DoubleSide,
 		transparent:true
@@ -184,6 +183,10 @@ function drawVis(events) {
 	for(var i = 0;i<objects.length;i++) {
 		objects[i].add(labels[i]);
 	}
+
+	// initialize camera plugins to drag the camera
+	var orbitControls = new THREE.OrbitControls(camera)//, renderer.domElement);
+	orbitControls.autoRotate = true
 
 	// animate/render loop
 	var animate = function () {
